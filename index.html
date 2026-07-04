@@ -3,32 +3,44 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cyber Buddha Story</title>
+  <title>Stories of the Buddha</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <div class="app-shell">
     <section class="screen intro-screen active" id="introScreen">
       <div class="hero">
-        <div class="buddha">
-          <div class="head"></div>
+        <div class="buddha" aria-hidden="true">
+          <div class="bun"></div>
+          <div class="hair"></div>
+          <div class="head">
+            <span class="eye eye-left"></span>
+            <span class="eye eye-right"></span>
+            <span class="eyebrow eyebrow-left"></span>
+            <span class="eyebrow eyebrow-right"></span>
+            <span class="nose"></span>
+            <span class="lips"></span>
+          </div>
           <div class="body"></div>
+          <div class="robe"></div>
           <div class="left-arm"></div>
           <div class="right-arm"></div>
-          <div class="halo"></div>
+          <div class="ushnisha"></div>
         </div>
       </div>
+
       <div class="intro-copy">
-        <h1>Cyber Buddha Stories</h1>
-        <p>Tap start to listen to a calm story with word-by-word highlighting.</p>
+        <h1>Stories of the Buddha</h1>
+        <p>Welcome to a calm meditation experience where the story is read with gentle care.</p>
       </div>
+
       <button class="primary-button" id="startButton">Start</button>
     </section>
 
     <section class="screen story-screen" id="storyScreen">
       <header class="toolbar">
         <button class="icon-button" id="backButton" aria-label="Back">←</button>
-        <div class="toolbar-title">Story Time</div>
+        <div class="toolbar-title">Mindful Story</div>
         <button class="icon-button" id="fullscreenButton" aria-label="Full screen">⛶</button>
       </header>
 
@@ -39,33 +51,44 @@
       </main>
 
       <div class="controls-panel">
-        <div class="voices">
-          <label class="voice-toggle">
-            <input type="radio" name="voiceGender" value="female" checked />
-            Female
-          </label>
-          <label class="voice-toggle">
-            <input type="radio" name="voiceGender" value="male" />
-            Male
-          </label>
-        </div>
-
         <div class="playback-row">
-          <button class="icon-button" id="playButton" aria-label="Play">▶</button>
-          <button class="icon-button hidden" id="pauseButton" aria-label="Pause">❚❚</button>
-          <button class="secondary-button" id="speedButton">Speed: 1.0x</button>
-          <button class="icon-button" id="volumeButton" aria-label="Volume">🔊</button>
+          <button class="play-toggle" id="playButton" aria-label="Play">▶</button>
+          <button class="play-toggle hidden" id="pauseButton" aria-label="Pause">❚❚</button>
+
+          <div class="progress-block">
+            <div class="progress-meta">
+              <span id="progressText">0:00 / 0:00</span>
+              <span id="speedLabel">1.0x</span>
+            </div>
+            <input type="range" id="progressSlider" min="0" max="100" step="1" value="0" />
+          </div>
         </div>
 
-        <div class="extra-controls hidden" id="speedOptions">
-          <button class="speed-option" data-speed="0.75">0.75x</button>
-          <button class="speed-option active" data-speed="1">1.0x</button>
-          <button class="speed-option" data-speed="1.25">1.25x</button>
-          <button class="speed-option" data-speed="1.5">1.5x</button>
-        </div>
+        <div class="control-grid">
+          <label class="control-card">
+            <span>Voice</span>
+            <select id="voiceSelect">
+              <option value="female">Female Voice</option>
+              <option value="male">Male Voice</option>
+            </select>
+          </label>
 
-        <div class="volume-control hidden" id="volumeControl">
-          <input type="range" min="0" max="1" step="0.05" value="1" id="volumeSlider" />
+          <label class="control-card">
+            <span>Speed</span>
+            <select id="speedSelect">
+              <option value="0.5">0.5x</option>
+              <option value="0.75">0.75x</option>
+              <option value="1" selected>1.0x</option>
+              <option value="1.25">1.25x</option>
+              <option value="1.5">1.5x</option>
+              <option value="2">2.0x</option>
+            </select>
+          </label>
+
+          <label class="control-card">
+            <span>Volume</span>
+            <input type="range" id="volumeSlider" min="0" max="100" value="100" />
+          </label>
         </div>
       </div>
     </section>

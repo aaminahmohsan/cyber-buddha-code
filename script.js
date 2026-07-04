@@ -5,31 +5,69 @@ const backButton = document.getElementById('backButton');
 const fullscreenButton = document.getElementById('fullscreenButton');
 const playButton = document.getElementById('playButton');
 const pauseButton = document.getElementById('pauseButton');
-const speedButton = document.getElementById('speedButton');
-const speedOptions = document.getElementById('speedOptions');
-const volumeButton = document.getElementById('volumeButton');
-const volumeControl = document.getElementById('volumeControl');
-const volumeSlider = document.getElementById('volumeSlider');
 const storyText = document.getElementById('storyText');
-const voiceGenderRadios = document.querySelectorAll('input[name="voiceGender"]');
-const speedOptionButtons = document.querySelectorAll('.speed-option');
+const progressSlider = document.getElementById('progressSlider');
+const progressText = document.getElementById('progressText');
+const speedLabel = document.getElementById('speedLabel');
+const speedSelect = document.getElementById('speedSelect');
+const voiceSelect = document.getElementById('voiceSelect');
+const volumeSlider = document.getElementById('volumeSlider');
 
-const story = `Long ago, in a quiet valley, there was a gentle monk who walked beneath the trees. He listened to birdsong, watched the river flow, and learned that every small moment can become a source of peace. One day he shared a story with a traveler, teaching that kindness and stillness are the truest blessings.`;
+const story = `Before I became known as the Buddha, I was Siddhartha Gautama, searching for the truth about suffering and the meaning of life. I believed that by denying myself food and comfort, I could become wiser.
 
-let utterance = null;
+So, I went into the forest and lived denying myself, eating only tiny amounts of food each day.
+
+I only ate one dish called rice pudding (kheer), which was given to me by a village woman named Sujata. She came every day under the Bodhi Tree where I used to sit.
+
+As time passed, my body became extremely weak. My bones showed through my skin, and I hardly had the strength to walk or meditate.
+
+I thought that going through great suffering would bring me closer to the truth, but instead it left me exhausted and unable to think clearly.
+
+Then I realized something important.
+
+Starving myself was not leading me to peace or understanding.
+
+I saw that both a life of luxury and a life of extreme suffering were unbalanced.
+
+The true path was the Middle Way�a life of balance, neither too strict nor too easy.
+
+I accepted a simple meal to regain my strength.
+
+With a healthy body and a focused mind, I sat beneath the Bodhi Tree and continued my meditation.
+
+There I finally reached enlightenment and became the Buddha.
+
+From this experience, I learned that true wisdom comes not from hurting ourselves or searching for comfort, but from living with balance, kindness, and understanding.
+
+That is the lesson I continue to share with the world.`;
+
+let words = [];
+let wordElements = [];
 let currentWordIndex = 0;
 let voiceRate = 1;
-let volume = 1;
-let activeGender = 'female';
+let volume = 100;
+let activeVoiceType = 'female';
 let isPlaying = false;
-let spanElements = [];
+let utterance = null;
+let progressTimer = null;
+let startTime = 0;
+let accumulatedTime = 0;
 
 function buildStoryText() {
-  const words = story.split(' ');
-  storyText.innerHTML = words
-    .map((word, index) => `<span data-index="${index}">${word}</span>`)
-    .join(' ');
-  spanElements = Array.from(storyText.querySelectorAll('span'));
+  words = story.split(/\s+/).filter(Boolean);
+  storyText.innerHTML = '';
+  wordElements = [];
+
+  words.forEach((word, index) => {
+    const span = document.createElement('span');
+    span.textContent = word;
+    span.dataset.index = index;
+    storyText.appendChild(span);
+    storyText.appendChild(document.createTextNode(' '));
+    wordElements.push(span);
+  });
+
+  updateProgressLabel();
 }
 
 function showScreen(screen) {
@@ -37,18 +75,18 @@ function showScreen(screen) {
   storyScreen.classList.toggle('active', screen === 'story');
 }
 
-function resetHighlights() {
-  spanElements.forEach((span) => span.classList.remove('active'));
-  currentWordIndex = 0;
+function clearHighlights() {
+  wordElements.forEach((span) => span.classList.remove('active'));
 }
 
-function stopSpeech() {
-  if (speechSynthesis.speaking || speechSynthesis.pending) {
-    speechSynthesis.cancel();
+function highlightWord(index) {
+  clearHighlights();
+  currentWordIndex = Math.max(0, Math.min(index, words.length - 1));
+  const span = wordElements[currentWordIndex];
+  if (span) {
+    span.classList.add('active');
+    span.scrollIntoView({ block: 'center', inline: 'nearest', behavior: 'smooth' });
   }
-  isPlaying = false;
-  playButton.classList.remove('hidden');
-  pauseButton.classList.add('hidden');
 }
 
 function updatePlayState() {
@@ -56,99 +94,172 @@ function updatePlayState() {
   pauseButton.classList.toggle('hidden', !isPlaying);
 }
 
-function makeUtterance() {
-  if (utterance) {
-    speechSynthesis.cancel();
-  }
-
-  utterance = new SpeechSynthesisUtterance(story);
-  utterance.rate = voiceRate;
-  utterance.volume = volume;
-  utterance.pitch = activeGender === 'female' ? 1.2 : 0.82;
-
-  const voices = speechSynthesis.getVoices();
-  if (voices.length) {
-    const chosenVoice = voices.find((voice) => {
-      const name = voice.name.toLowerCase();
-      return activeGender === 'female'
-        ? name.includes('female') || name.includes('woman') || name.includes('samantha') || name.includes('alloy')
-        : name.includes('male') || name.includes('man') || name.includes('daniel') || name.includes('matthew');
-    }) || voices[0];
-    utterance.voice = chosenVoice;
-  }
-
-  utterance.onboundary = (event) => {
-    if (event.name !== 'word') return;
-    const charIndex = event.charIndex;
-    const textBefore = story.slice(0, charIndex);
-    currentWordIndex = textBefore.split(' ').length - 1;
-    highlightWord(currentWordIndex);
-  };
-
-  utterance.onend = () => {
-    isPlaying = false;
-    updatePlayState();
-  };
-
-  utterance.onerror = () => {
-    isPlaying = false;
-    updatePlayState();
-  };
+function formatTime(seconds) {
+  const safeSeconds = Math.max(0, Math.round(seconds));
+  const minutes = Math.floor(safeSeconds / 60);
+  const secs = String(safeSeconds % 60).padStart(2, '0');
+  return `${minutes}:${secs}`;
 }
 
-function highlightWord(index) {
-  resetHighlights();
-  const span = spanElements[index];
-  if (span) {
-    span.classList.add('active');
-    span.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'smooth' });
-  }
+function getEstimatedDuration() {
+  return words.length * 500 / voiceRate;
 }
 
-function playStory() {
+function updateProgressLabel() {
+  const totalSeconds = getEstimatedDuration() / 1000;
+  const elapsedSeconds = isPlaying ? (accumulatedTime + (Date.now() - startTime)) / 1000 : accumulatedTime / 1000;
+  progressText.textContent = `${formatTime(elapsedSeconds)} / ${formatTime(totalSeconds)}`;
+}
+
+function startProgressTimer() {
+  clearInterval(progressTimer);
+  startTime = Date.now();
+  progressTimer = window.setInterval(() => {
+    if (!isPlaying) return;
+    updateProgressLabel();
+    const elapsed = accumulatedTime + (Date.now() - startTime);
+    const percent = Math.min(100, (elapsed / getEstimatedDuration()) * 100);
+    progressSlider.value = percent;
+    const newIndex = Math.min(words.length - 1, Math.floor((percent / 100) * words.length));
+    if (newIndex !== currentWordIndex) {
+      highlightWord(newIndex);
+    }
+  }, 180);
+}
+
+function stopProgressTimer() {
+  clearInterval(progressTimer);
+  progressTimer = null;
+}
+
+function getPreferredVoice() {
+  const voices = window.speechSynthesis.getVoices();
+  const query = activeVoiceType === 'female' ? /female|woman|samantha|zira|victoria|susan/i : /male|man|david|daniel|mark|james|alex/i;
+  return voices.find((voice) => query.test(voice.name)) || voices[0] || null;
+}
+
+function stopSpeech() {
+  window.speechSynthesis.cancel();
+  stopProgressTimer();
+  isPlaying = false;
+  updatePlayState();
+}
+
+function playStory(startIndex = currentWordIndex) {
   if (!('speechSynthesis' in window)) {
     alert('Speech synthesis is not supported in this browser.');
     return;
   }
 
-  if (speechSynthesis.speaking) {
+  if (window.speechSynthesis.paused && utterance) {
+    window.speechSynthesis.resume();
+    isPlaying = true;
+    startTime = Date.now();
+    updatePlayState();
+    startProgressTimer();
+    updateProgressLabel();
     return;
   }
 
-  resetHighlights();
-  makeUtterance();
-  speechSynthesis.speak(utterance);
+  if (window.speechSynthesis.speaking) {
+    return;
+  }
+
+  const safeIndex = Math.max(0, Math.min(startIndex, words.length - 1));
+  currentWordIndex = safeIndex;
+  highlightWord(safeIndex);
+
+  const textToSpeak = words.slice(safeIndex).join(' ');
+  utterance = new SpeechSynthesisUtterance(textToSpeak);
+  utterance.rate = voiceRate;
+  utterance.volume = volume / 100;
+  utterance.pitch = activeVoiceType === 'female' ? 1.1 : 0.95;
+  utterance.voice = getPreferredVoice();
+
+  let spokenWordCount = 0;
+  utterance.onboundary = (event) => {
+    if (event.name === 'word') {
+      const absoluteIndex = safeIndex + spokenWordCount;
+      spokenWordCount += 1;
+      currentWordIndex = absoluteIndex;
+      highlightWord(currentWordIndex);
+    }
+  };
+
+  utterance.onend = () => {
+    isPlaying = false;
+    accumulatedTime = getEstimatedDuration();
+    stopProgressTimer();
+    updatePlayState();
+    updateProgressLabel();
+    progressSlider.value = 100;
+  };
+
+  utterance.onerror = () => {
+    isPlaying = false;
+    stopProgressTimer();
+    updatePlayState();
+  };
+
+  window.speechSynthesis.cancel();
+  window.speechSynthesis.speak(utterance);
   isPlaying = true;
+  accumulatedTime = (safeIndex / Math.max(1, words.length)) * getEstimatedDuration();
+  startTime = Date.now();
   updatePlayState();
+  startProgressTimer();
+  updateProgressLabel();
 }
 
 function pauseStory() {
-  if (speechSynthesis.speaking) {
-    speechSynthesis.pause();
+  if (window.speechSynthesis.speaking) {
+    window.speechSynthesis.pause();
+    accumulatedTime += Date.now() - startTime;
+    isPlaying = false;
+    stopProgressTimer();
+    updatePlayState();
+    updateProgressLabel();
   }
-  isPlaying = false;
-  updatePlayState();
-}
-
-function toggleSpeedOptions() {
-  speedOptions.classList.toggle('hidden');
 }
 
 function setSpeed(value) {
   voiceRate = Number(value);
-  speedButton.textContent = `Speed: ${voiceRate.toFixed(2)}x`;
-  speedOptionButtons.forEach((button) => {
-    button.classList.toggle('active', button.dataset.speed === value.toString());
-  });
+  speedLabel.textContent = `${voiceRate.toFixed(2).replace(/\.0+$/, '')}x`;
+  if (isPlaying || window.speechSynthesis.paused) {
+    const currentStart = currentWordIndex;
+    stopSpeech();
+    playStory(currentStart);
+  }
 }
 
-function toggleVolumeControl() {
-  volumeControl.classList.toggle('hidden');
+function setVoice(type) {
+  activeVoiceType = type;
+  if (isPlaying || window.speechSynthesis.paused) {
+    const currentStart = currentWordIndex;
+    stopSpeech();
+    playStory(currentStart);
+  }
 }
 
-function updateVolume(value) {
+function setVolume(value) {
   volume = Number(value);
-  volumeButton.textContent = volume === 0 ? '🔇' : '🔊';
+  if (utterance) {
+    utterance.volume = volume / 100;
+  }
+}
+
+function seekTo(percent) {
+  const targetIndex = Math.min(words.length - 1, Math.floor((percent / 100) * words.length));
+  currentWordIndex = targetIndex;
+  highlightWord(targetIndex);
+  accumulatedTime = (targetIndex / Math.max(1, words.length)) * getEstimatedDuration();
+
+  if (window.speechSynthesis.speaking || window.speechSynthesis.paused) {
+    stopSpeech();
+    playStory(targetIndex);
+  }
+
+  updateProgressLabel();
 }
 
 function toggleFullScreen() {
@@ -161,7 +272,7 @@ function toggleFullScreen() {
 
 startButton.addEventListener('click', () => {
   showScreen('story');
-  resetHighlights();
+  highlightWord(0);
 });
 
 backButton.addEventListener('click', () => {
@@ -170,33 +281,32 @@ backButton.addEventListener('click', () => {
 });
 
 fullscreenButton.addEventListener('click', toggleFullScreen);
-playButton.addEventListener('click', playStory);
+playButton.addEventListener('click', () => {
+  if (isPlaying) {
+    pauseStory();
+  } else {
+    playStory(currentWordIndex);
+  }
+});
 pauseButton.addEventListener('click', pauseStory);
-speedButton.addEventListener('click', toggleSpeedOptions);
-volumeButton.addEventListener('click', toggleVolumeControl);
-volumeSlider.addEventListener('input', (event) => updateVolume(event.target.value));
-
-speedOptionButtons.forEach((button) => {
-  button.addEventListener('click', () => {
-    setSpeed(button.dataset.speed);
-    toggleSpeedOptions();
-  });
-});
-
-voiceGenderRadios.forEach((radio) => {
-  radio.addEventListener('change', (event) => {
-    activeGender = event.target.value;
-  });
-});
+speedSelect.addEventListener('change', (event) => setSpeed(event.target.value));
+voiceSelect.addEventListener('change', (event) => setVoice(event.target.value));
+volumeSlider.addEventListener('input', (event) => setVolume(event.target.value));
+progressSlider.addEventListener('input', (event) => seekTo(Number(event.target.value)));
 
 window.addEventListener('beforeunload', () => {
   stopSpeech();
 });
 
 window.speechSynthesis?.addEventListener('voiceschanged', () => {
-  buildStoryText();
+  if (utterance) {
+    utterance.voice = getPreferredVoice();
+  }
 });
 
 buildStoryText();
 setSpeed(1);
-updateVolume(1);
+setVoice('female');
+setVolume(100);
+updatePlayState();
+updateProgressLabel();
