@@ -303,8 +303,17 @@ function buildStoryText() {
   spanElements = Array.from(storyText.querySelectorAll('span'));
   resetHighlights();
   updateProgressBar();
+  addWordClickListeners();
 }
-
+function addWordClickListeners() {
+  spanElements.forEach((span) => {
+    span.style.cursor = 'pointer';
+    span.addEventListener('click', () => {
+      const wordIndex = Number(span.dataset.index);
+      playFromWordIndex(wordIndex);
+    });
+  });
+}
 function showScreen(screen) {
   introScreen.classList.toggle('active', screen === 'intro');
   storyScreen.classList.toggle('active', screen === 'story');
@@ -535,6 +544,68 @@ function playStory() {
   updatePlayState();
   updateProgressBar();
 }
+function playFromWordIndex(startIndex) {
+  if (!('speechSynthesis' in window)) {
+    alert('Speech synthesis is not supported in this browser.');
+    return;
+  }
+
+  stopSpeech(); // Stop any current playback
+
+  // Get all words and calculate substring from clicked position
+  const words = currentStory.trim().split(/\s+/);
+  const startingWords = words.slice(startIndex);
+  const substoryFromClick = startingWords.join(' ');
+
+  // Create utterance from the clicked position onwards
+  utterance = new SpeechSynthesisUtterance(substoryFromClick);
+  utterance.lang = languageLocaleMap[currentLanguage] || 'en-US';
+  utterance.rate = voiceRate;
+  utterance.volume = volume;
+  utterance.pitch = activeVoice === 'female' ? 1.15 : 0.85;
+
+  const selectedVoice = getVoiceForLanguage(currentLanguage);
+  if (selectedVoice) {
+    utterance.voice = selectedVoice;
+  }
+
+  let offsetWordIndex = startIndex; // Track offset from start
+
+  utterance.onboundary = (event) => {
+    if (event.name !== 'word') return;
+    try {
+      const spokenSoFar = substoryFromClick.slice(0, event.charIndex);
+      const wordsSoFar = spokenSoFar.split(/\s+/).filter(Boolean).length;
+      if (wordsSoFar > 0 && wordsSoFar <= spanElements.length) {
+        currentWordIndex = Math.max(0, offsetWordIndex + wordsSoFar - 1);
+        highlightWord(currentWordIndex);
+        updateProgressBar();
+      }
+    } catch (e) {
+      console.error('Boundary event error:', e);
+    }
+  };
+
+  utterance.onend = () => {
+    stopHighlightSync();
+    currentWordIndex = Math.max(1, currentStory.trim().split(/\s+/).length);
+    updateProgressBar();
+    isPlaying = false;
+    updatePlayState();
+    showQuestionScreen();
+  };
+
+  utterance.onerror = () => {
+    isPlaying = false;
+    updatePlayState();
+  };
+
+  speechSynthesis.speak(utterance);
+  startHighlightSync();
+  isPlaying = true;
+  updatePlayState();
+  updateProgressBar();
+}
 
 function pauseStory() {
   if (speechSynthesis.speaking) {
@@ -613,11 +684,19 @@ speedSelect.addEventListener('change', (event) => {
 });
 volumeSlider.addEventListener('input', (event) => updateVolume(event.target.value));
 progressSlider.addEventListener('input', (event) => {
-  const words = currentStory.trim().split(/\s+/);
-  const totalWords = Math.max(1, words.length);
-  currentWordIndex = Math.round((Number(event.target.value) / 100) * totalWords);
-  highlightWord(currentWordIndex);
-  updateProgressBar();
+  const words = currentStory.trim().split(/\s+/);
+  const totalWords = Math.max(1, words.length);
+  const clickedWordIndex = Math.round((Number(event.target.value) / 100) * totalWords);
+
+  // If already playing, play from clicked position
+  if (isPlaying) {
+    playFromWordIndex(clickedWordIndex);
+  } else {
+    // If not playing, just update visual position
+    currentWordIndex = clickedWordIndex;
+    highlightWord(currentWordIndex);
+    updateProgressBar();
+  }
 });
 
 window.addEventListener('beforeunload', () => {
