@@ -321,30 +321,20 @@ function stopHighlightSync() {
     highlightTimer = null;
   }
 }
-
 function startHighlightSync() {
-  stopHighlightSync();
+  stopHighlightSync();
 
-  const words = currentStory.trim().split(/\s+/);
-  const totalWords = Math.max(1, words.length);
-  const wordsPerSecond = Math.max(1.4, voiceRate * 2.2);
-  highlightStartTime = performance.now() - (currentWordIndex / wordsPerSecond) * 1000;
-
-  highlightTimer = window.setInterval(() => {
-    if (!speechSynthesis.speaking || speechSynthesis.paused) {
-      return;
-    }
-
-    const elapsedMs = performance.now() - highlightStartTime;
-    const expectedWordIndex = Math.min(totalWords - 1, Math.max(0, Math.floor((elapsedMs / 1000) * wordsPerSecond)));
-
-    if (expectedWordIndex !== currentWordIndex) {
-      currentWordIndex = expectedWordIndex;
-      highlightWord(currentWordIndex);
-      updateProgressBar();
-    }
-  }, 120);
+  // Fallback sync only if onboundary isn't firing
+  // Use a longer interval for safety (don't interfere with onboundary)
+  highlightTimer = window.setInterval(() => {
+    if (!speechSynthesis.speaking || speechSynthesis.paused) {
+      return;
+    }
+    updateProgressBar(); // Just update the progress bar, don't change word index
+  }, 500);
 }
+
+
 
 function stopSpeech() {
   if (speechSynthesis.speaking || speechSynthesis.pending || speechSynthesis.paused) {
