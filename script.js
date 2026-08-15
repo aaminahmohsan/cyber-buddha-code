@@ -280,30 +280,30 @@ const questions = [
     question: "Q6.who was siddhartha buddha ?",
     answer: "sidhartha gautama was the founder of the religion buddhisms."
   },
-   {
+  {
     question: "Q7.Where was Siddhartha Buddha born ?",
     answer: "He was born in Lumbini in nepal."
   },
-];
-
+  {
+    question: "Q9.what was siddhartha's mother's name ?",
+    answer: "her name was maya and she was a queen."
+  },
+  {
+    question: "Q10.what was siddhartha's father's name ?",
+    answer: "his name was shuddhodana and he was a king."
+  },
+ {
+    question: "Q11.Under which tree did Siddhartha attain enlightenment?",
+    answer: "He attained enlightenment under the Bodhi Tree."
+  },
+  {
+    question: "Q12.what is buddhism?",
+    answer: "Buddhism is the religion based on the teachings of Gautama Buddha."
+  },
+]
 function buildStoryText() {
-  const paragraphs = currentStory.trim().split(/\n\s*\n/);
-  let globalIndex = 0;
-
-  storyText.innerHTML = paragraphs
-    .map((paragraph) => {
-      const words = paragraph.trim().split(/\s+/);
-      const wordMarkup = words
-        .map((word) => `<span data-index="${globalIndex++}">${word}</span>`)
-        .join(' ');
-      return `<p>${wordMarkup}</p>`;
-    })
-    .join('');
-
-  spanElements = Array.from(storyText.querySelectorAll('span'));
-  resetHighlights();
-  updateProgressBar();
-  addWordClickListeners();
+  // Legacy word-level highlighting removed for slide-based presentation.
+  buildSlides();
 }
 function addWordClickListeners() {
   spanElements.forEach((span) => {
@@ -367,13 +367,16 @@ function formatTime(seconds) {
 }
 
 function updateProgressBar() {
-  const words = currentStory.trim().split(/\s+/);
-  const totalWords = Math.max(1, words.length);
-  const progressPercent = (currentWordIndex / totalWords) * 100;
-  progressSlider.value = Math.min(100, Math.max(0, progressPercent));
-  const estimatedTotalSeconds = totalWords / (voiceRate * 2.2);
-  const estimatedCurrentSeconds = currentWordIndex / (voiceRate * 2.2);
-  progressText.textContent = `${formatTime(estimatedCurrentSeconds)} / ${formatTime(estimatedTotalSeconds)}`;
+  if (slides && slides.length > 1) {
+    const progressPercent = (currentSlide / Math.max(1, slides.length - 1)) * 100;
+    progressSlider.value = Math.min(100, Math.max(0, progressPercent));
+    progressText.textContent = `Slide ${currentSlide + 1} / ${slides.length}`;
+  } else {
+    const words = currentStory.trim().split(/\s+/);
+    const totalWords = Math.max(1, words.length);
+    const progressPercent = (currentWordIndex / totalWords) * 100;
+    progressSlider.value = Math.min(100, Math.max(0, progressPercent));
+  }
   speedLabel.textContent = `${voiceRate.toFixed(2)}x`;
 }
 
@@ -382,6 +385,164 @@ function showQuestionScreen() {
   buildQuestionList();
   thankYouMessage.classList.add('hidden');
 }
+
+// --- Slide-based presentation logic ---
+let slides = [];
+let currentSlide = 0;
+let currentWordStartIndices = [];
+
+function splitIntoSentences(text) {
+  const flat = text.replace(/\n+/g, ' ').trim();
+  const parts = flat.split(/(?<=[\.\?!])\s+/);
+  return parts.filter(Boolean);
+}
+
+function buildSlides() {
+  currentStory = storiesByLanguage[currentLanguage] || fullEnglishStory;
+  slides = splitIntoSentences(currentStory);
+  if (slides.length < 2) {
+    slides = currentStory.split(/\n\s*\n/).map(s => s.trim()).filter(Boolean);
+  }
+  currentSlide = 0;
+  renderSlide();
+}
+
+function renderSlide() {
+  const total = slides.length;
+  const text = slides[currentSlide] || '';
+  // build per-word spans for highlighting
+  const words = text.split(/\s+/).filter(Boolean);
+  currentWordStartIndices = [];
+  let cursor = 0;
+  const html = words
+    .map((w, i) => {
+      const escaped = w.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      currentWordStartIndices.push(cursor);
+      cursor += w.length + 1; // +1 for the space separator
+      return `<span data-index="${i}">${escaped}</span>`;
+    })
+    .join(' ');
+  storyText.innerHTML = html;
+  spanElements = Array.from(storyText.querySelectorAll('span'));
+  resetHighlights();
+  progressText.textContent = `Slide ${currentSlide + 1} / ${total}`;
+  const prev = document.getElementById('prevSlide');
+  const next = document.getElementById('nextSlide');
+  if (prev) prev.disabled = currentSlide <= 0;
+  if (next) next.disabled = currentSlide >= total - 1;
+}
+
+function nextSlide() {
+  if (currentSlide < slides.length - 1) {
+    currentSlide++;
+    renderSlide();
+    if (isPlaying) speakCurrentSlide();
+  }
+}
+
+function prevSlide() {
+  if (currentSlide > 0) {
+    currentSlide--;
+    renderSlide();
+    if (isPlaying) speakCurrentSlide();
+  }
+}
+
+function speakCurrentSlide() {
+  stopSpeech();
+  const text = slides[currentSlide] || '';
+  // set up word-boundary highlighting
+  utterance.onstart = () => {
+    isPlaying = true;
+    updatePlayState();
+  };
+  utterance.onboundary = (event) => {
+    if (!event.charIndex && event.charIndex !== 0) return;
+    try {
+      let idx = 0;
+      for (let i = currentWordStartIndices.length - 1; i >= 0; i--) {
+        if (currentWordStartIndices[i] <= event.charIndex) {
+          idx = i;
+          break;
+        }
+      }
+      highlightWord(idx);
+      updateProgressBar();
+    } catch (e) {
+      console.error('boundary highlight error', e);
+    }
+  };
+  utterance.onend = () => {
+    isPlaying = false;
+    updatePlayState();
+    resetHighlights();
+    // automatically advance to next slide if not last
+    if (currentSlide < slides.length - 1) {
+      currentSlide++;
+      renderSlide();
+      // autoplay next slide
+      speakCurrentSlide();
+    } else {
+      // finished story
+      showQuestionScreen();
+    }
+  };
+  speechSynthesis.speak(utterance);
+    found = voices.find(v => v.lang && v.lang.toLowerCase().startsWith((utterance.lang || '').toLowerCase()));
+    if (!found) {
+      found = voices.find(v => v.name.toLowerCase().includes(selectedVoice.toLowerCase()));
+    }
+    if (found) utterance.voice = found;
+  }
+  utterance.onstart = () => {
+    isPlaying = true;
+    updatePlayState();
+  };
+  utterance.onend = () => {
+    isPlaying = false;
+    updatePlayState();
+  };
+  speechSynthesis.speak(utterance);
+  {}
+
+function wireUI() {
+  const prev = document.getElementById('prevSlide');
+  const next = document.getElementById('nextSlide');
+
+  if (prev) prev.addEventListener('click', prevSlide);
+  if (next) next.addEventListener('click', nextSlide);
+  playButton.addEventListener('click', () => { speakCurrentSlide(); });
+  pauseButton.addEventListener('click', () => { stopSpeech(); });
+  languageSelect.addEventListener('change', () => {
+    currentLanguage = languageSelect.value;
+    buildSlides();
+  });
+  speedSelect.addEventListener('change', () => { voiceRate = parseFloat(speedSelect.value) || 1; });
+  volumeSlider.addEventListener('input', () => { volume = (Number(volumeSlider.value) || 100) / 100; });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight') nextSlide();
+    if (e.key === 'ArrowLeft') prevSlide();
+  });
+}
+
+function populateVoices() {
+  const voices = speechSynthesis.getVoices();
+  voiceSelect.innerHTML = '';
+  voices.forEach(v => {
+    const opt = document.createElement('option');
+    opt.value = v.name;
+    opt.textContent = `${v.name} — ${v.lang}`;
+    voiceSelect.appendChild(opt);
+  });
+  if (!voiceSelect.value && voices[0]) voiceSelect.value = voices[0].name;
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  populateVoices();
+  speechSynthesis.onvoiceschanged = populateVoices;
+  buildSlides();
+  wireUI();
+});
 
 function buildQuestionList() {
   questionList.innerHTML = questions
@@ -523,6 +684,9 @@ function playStory() {
     return;
   }
 
+  const words = currentStory.trim().split(/\s+/);
+  const totalWords = Math.max(1, words.length);
+
   if (speechSynthesis.paused) {
     speechSynthesis.resume();
     startHighlightSync();
@@ -531,7 +695,12 @@ function playStory() {
     return;
   }
 
-  if (speechSynthesis.speaking) {
+  if (speechSynthesis.speaking || speechSynthesis.pending) {
+    return;
+  }
+
+  if (currentWordIndex > 0 && currentWordIndex < totalWords) {
+    playFromWordIndex(currentWordIndex);
     return;
   }
 
@@ -607,14 +776,19 @@ function playFromWordIndex(startIndex) {
   updateProgressBar();
 }
 
-function pauseStory() {
-  if (speechSynthesis.speaking) {
-    speechSynthesis.pause();
+function pauseStory() 
+  if (!('speechSynthesis' in window)) {
+    return;
   }
-  stopHighlightSync();
-  isPlaying = false;
-  updatePlayState();
+
+  if (utterance && isPlaying) {
+    speechSynthesis.pause();
+    stopHighlightSync();
+    isPlaying = false;
+    updatePlayState();
+
 }
+
 
 function setLanguage(languageCode) {
   currentLanguage = languageCode;
@@ -631,7 +805,7 @@ function setSpeed(value) {
   updateProgressBar();
   if (speechSynthesis.speaking || speechSynthesis.paused) {
     stopSpeech();
-    playStory();
+    speakCurrentSlide();
   }
 }
 
@@ -652,7 +826,10 @@ function toggleFullScreen() {
 
 startButton.addEventListener('click', () => {
   showScreen('story');
-  resetHighlights();
+  buildSlides();
+  renderSlide();
+  // autoplay first slide
+  speakCurrentSlide();
 });
 
 backButton.addEventListener('click', () => {
@@ -667,36 +844,57 @@ questionBackButton.addEventListener('click', () => {
 doneButton.addEventListener('click', finishQuestions);
 
 fullscreenButton.addEventListener('click', toggleFullScreen);
-playButton.addEventListener('click', playStory);
-pauseButton.addEventListener('click', pauseStory);
+playButton.addEventListener('click', () => {
+  if (speechSynthesis.paused) {
+    speechSynthesis.resume();
+    startHighlightSync();
+    isPlaying = true;
+    updatePlayState();
+  } else {
+    speakCurrentSlide();
+  }
+});
+pauseButton.addEventListener('click', () => {
+  if (speechSynthesis.speaking) {
+    speechSynthesis.pause();
+    stopHighlightSync();
+    isPlaying = false;
+    updatePlayState();
+  }
+});
 voiceSelect.addEventListener('change', (event) => {
   activeVoice = event.target.value;
   if (speechSynthesis.speaking || speechSynthesis.paused) {
     stopSpeech();
-    playStory();
+    speakCurrentSlide();
   }
 });
 languageSelect.addEventListener('change', (event) => {
   setLanguage(event.target.value);
+  // rebuild slides and autoplay current slide if was playing
+  buildSlides();
+  renderSlide();
+  if (isPlaying) speakCurrentSlide();
 });
 speedSelect.addEventListener('change', (event) => {
   setSpeed(event.target.value);
+  if (isPlaying) {
+    stopSpeech();
+    speakCurrentSlide();
+  }
 });
 volumeSlider.addEventListener('input', (event) => updateVolume(event.target.value));
 progressSlider.addEventListener('input', (event) => {
-  const words = currentStory.trim().split(/\s+/);
-  const totalWords = Math.max(1, words.length);
-  const clickedWordIndex = Math.round((Number(event.target.value) / 100) * totalWords);
-
-  // If already playing, play from clicked position
-  if (isPlaying) {
-    playFromWordIndex(clickedWordIndex);
-  } else {
-    // If not playing, just update visual position
-    currentWordIndex = clickedWordIndex;
-    highlightWord(currentWordIndex);
-    updateProgressBar();
-  }
+  const pct = Math.min(100, Math.max(0, Number(event.target.value)));
+  const slideIndex = Math.round((pct / 100) * Math.max(0, slides.length - 1));
+  if (isPlaying) {
+    currentSlide = slideIndex;
+    renderSlide();
+    speakCurrentSlide();
+  } else {
+    currentSlide = slideIndex;
+    renderSlide();
+  }
 });
 
 window.addEventListener('beforeunload', () => {
