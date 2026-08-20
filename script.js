@@ -36,7 +36,8 @@ const languageLocaleMap = {
   it: 'it-IT',
   'es-MX': 'es-MX',
   ru: 'ru-RU',
-  vi: 'vi-VN'
+  vi: 'vi-VN',
+  ta: 'ta-IN'
 };
 
 const fullEnglishStory = `Before I became known as the Buddha, I was Siddhartha Gautama, searching for the truth about suffering and the meaning of life. I believed that by denying myself food and comfort, I could become wiser. So, I went into the forest and lived as denying myself, eating only tiny amounts of food each day. I only ate one dish called the rice pudding (kheer) which was given to me by a village woman named Sujata. She came every day under the Bodhi tree where I used to sit.
@@ -53,6 +54,7 @@ The end`;
 
 const storiesByLanguage = {
   en: fullEnglishStory,
+
   hi: `मैं बुद्ध के रूप में जाने जाने से पहले, मैं सिद्धार्थ गौतम था, जो दुःख और जीवन का अर्थ जानने की सच्चाई की खोज में था। मैं मानता था कि खुद को भोजन और आराम से वंचित करके मैं अधिक समझदार बन सकता हूँ। इसलिए मैं जंगल में गया और अपने आपको त्यागते हुए रहा, हर दिन बहुत कम मात्रा में भोजन करता रहा। मैं सिर्फ एक पकवान खीर खाता था, जो मुझे सुजाता नाम की एक गाँव की महिला द्वारा दिया गया था। वह हर दिन उस बोधि वृक्ष के नीचे आती थी जहाँ मैं बैठा करता था।
 
 जैसे-जैसे समय बीता, मेरा शरीर बहुत कमजोर हो गया। मेरी हड्डियाँ मेरी त्वचा के बाहर दिखाई देने लगीं, और मुझे चलने या ध्यान करने की बहुत कम ताकत रही। मुझे लगा कि बहुत अधिक दुःख झेलने से मैं सत्य के निकट पहुँच जाऊँगा, लेकिन इसके बजाय, यह मुझे थका हुआ और स्पष्ट रूप से सोचने में असमर्थ छोड़ गया।
@@ -63,18 +65,20 @@ const storiesByLanguage = {
 
 इस अनुभव से, मैंने सीखा कि सच्ची बुद्धिमत्ता हमें चोट पहुँचाकर या आराम की तलाश करके नहीं मिलती, बल्कि संतुलन, करुणा और समझ के साथ जीकर मिलती है। यही सीख है जो मैं दुनिया के साथ साझा करता रहता हूँ।
 
-अंत` ,
+अंत`,
+
   ur: `میں بودہ کے نام سے مشہور ہونے سے پہلے، میں سیدارتھا گوتم تھا، جو درد اور زندگی کے معنی کی سچائی کی تلاش میں تھا۔ میں سمجھتا تھا کہ اپنے آپ کو غذا اور آرام سے محروم کر کے میں زیادہ دانا بن سکتا ہوں۔ اسی لیے میں جنگل میں گیا اور اپنے آپ کو انکار کرتے ہوئے رہا، ہر روز بہت کم مقدار میں غذا کھاتا رہا۔ میں صرف ایک پکوان کھیر کھاتا تھا، جو مجھے سوجاتا نامی ایک گاؤں کی عورت نے دیا تھا۔ وہ ہر روز اس بودی درخت کے نیچے آتی تھی جہاں میں بیٹھا کرتا تھا۔
 
-جیسے جیسے وقت گزرا، میرا جسم بہت کمزور ہو گیا۔ میری ہڈیوں کے ڈھانچے میری جلد کے اوپر نظر آنے لگے، اور مجھے چلنے یا ध्यान کرنے کی بہت کم طاقت رہی۔ مجھے लगा کہ بہت زیادہ تکلیف کا سامنا کرنے سے میں سچ کے قریب پہنچ جاؤں گا، لیکن اس کے بجائے یہ مجھے تھکا ہوا اور واضح طور پر سوچنے سے قاصر چھوڑ گیا۔
+جیسے جیسے وقت گزرا، میرا جسم بہت کمزور ہو گیا۔ مجھے چلنے یا توجہ کرنے کی بہت کم طاقت رہی۔ مجھے لگا کہ بہت زیادہ تکلیف کا سامنا کرنے سے میں سچ کے قریب پہنچ جاؤں گا، لیکن اس کے بجائے یہ مجھے تھکا ہوا اور واضح طور پر سوچنے سے قاصر چھوڑ گیا۔
 
-پھر مجھے ایک اہم بات سمجھ آئی۔ اپنے آپ کو بھوکا رکھنا مجھے سکون یا سمجھ نہیں دے رہا تھا۔ میں نے دیکھا کہ دونوں، زندگی کا شوق اور شدید تکلیف والی زندگی، غیر متوازن تھیں۔ سچا راستہ درمیانی راستہ تھا—ایک متوازن زندگی، نہ بہت سخت اور نہ بہت آسان۔
+پھر مجھے ایک اہم بات سمجھ آئی۔ اپنے آپ کو بھوکا رکھنا مجھے سکون یا سمجھ نہیں دے رہا تھا۔ میں نے دیکھا کہ عیش و آرام کی زندگی اور شدید تکلیف والی زندگی دونوں غیر متوازن تھیں۔ سچا راستہ درمیانی راستہ تھا—ایک متوازن زندگی، نہ بہت سخت اور نہ بہت آسان۔
 
-میں نے اپنی طاقت واپس حاصل کرنے کے لیے ایک سادہ کھانا قبول کیا۔ ایک صحت مند جسم اور ایک مرکوز ذہن کے ساتھ، میں بودی درخت کے نیچے بیٹھا اور اپنا ध्यान جاری رکھا۔ وہاں، بالآخر مجھے روشنائی ملی اور میں بودہ بن گیا۔
+میں نے اپنی طاقت واپس حاصل کرنے کے لیے ایک سادہ کھانا قبول کیا۔ ایک صحت مند جسم اور ایک مرکوز ذہن کے ساتھ، میں بودی درخت کے نیچے بیٹھا اور اپنا دھیان جاری رکھا۔ وہاں، بالآخر مجھے روشنائی ملی اور میں بودہ بن گیا۔
 
 اس تجربے سے، میں نے سیکھا کہ سچی دانائی ہمیں تکلیف دے کر یا آرام کی تلاش کر کے نہیں ملتی، بلکہ توازن، مہربانی اور تفہیم کے ساتھ زندگی گزار کر ملتی ہے۔ یہی سبق ہے جو میں دنیا کے ساتھ بانٹتا رہتا ہوں۔
 
-اختتام` ,
+اختتام`,
+
   pt: `Antes de ser conhecido como o Buda, eu era Siddhartha Gautama, à procura da verdade sobre a dor e o sentido da vida. Eu acreditava que, negando a mim mesmo comida e conforto, poderia me tornar mais sábio. Por isso, fui para a floresta e vivi me negando, comendo apenas pequenas quantidades de alimento todos os dias. Eu comia apenas um prato chamado arroz doce (kheer), que me era dado por uma mulher do vilarejo chamada Sujata. Ela vinha todos os dias debaixo da árvore Bodhi, onde costumava sentar-me.
 
 Com o passar do tempo, o meu corpo tornou-se extremamente fraco. Meus ossos apareciam através da pele, e mal tinha força para caminhar ou meditar. Achei que passar por grande sofrimento me aproximaria da verdade, mas, em vez disso, me deixou exausto e incapaz de pensar com clareza.
@@ -85,30 +89,34 @@ Aceitei uma refeição simples para recuperar minhas forças. Com um corpo saud�
 
 A partir dessa experiência, aprendi que a verdadeira sabedoria não vem de nos machucarmos nem de buscar conforto, mas de viver com equilíbrio, bondade e compreensão. Essa é a lição que continuo a compartilhar com o mundo.
 
-O fim` ,
+O fim`,
+
   'es-AR': `Antes de ser conocido como el Buda, yo era Siddhartha Gautama, buscando la verdad sobre el sufrimiento y el sentido de la vida. Creía que negándome comida y comodidad podría volverme más sabio. Por eso fui al bosque y viví negándome a mí mismo, comiendo solo pequeñas cantidades de alimento cada día. Yo solo comía un plato llamado arroz con leche (kheer), que me daba una mujer del pueblo llamada Sujata. Ella venía todos los días bajo el árbol Bodhi, donde solía sentarme.
 
 Con el paso del tiempo, mi cuerpo se volvió extremadamente débil. Mis huesos se veían a través de la piel, y apenas tenía fuerzas para caminar o meditar. Pensé que pasar por un gran sufrimiento me acercaría a la verdad, pero, en cambio, me dejó exhausto e incapaz de pensar con claridad.
 
-Entonces comprendí algo importante. Pasar hambre no me estaba acercando a la paz ni a la comprensión. Vi que tanto una vida de lujo como una vida de extrema sufrimiento estaban desequilibradas. El verdadero camino era el Camino del Medio: una vida de equilibrio, ni demasiado estricta ni demasiado fácil.
+Entonces comprendí algo importante. Pasar hambre no me estaba acercando a la paz ni a la comprensión. Vi que tanto una vida de lujo como una vida de sufrimiento extremo estaban desequilibradas. El verdadero camino era el Camino del Medio: una vida de equilibrio, ni demasiado estricta ni demasiado fácil.
 
 Acepté una comida sencilla para recuperar mis fuerzas. Con un cuerpo sano y una mente concentrada, me senté bajo el árbol Bodhi y continué mi meditación. Allí, por fin, alcancé la realización y me convertí en el Buda.
 
 De esta experiencia aprendí que la verdadera sabiduría no nace de hacernos daño ni de buscar comodidad, sino de vivir con equilibrio, bondad y comprensión. Esa es la lección que sigo compartiendo con el mundo.
 
-El fin` ,
+El fin`,
+
   es: `Antes de ser conocido como el Buda, yo era Siddhartha Gautama, buscando la verdad sobre el sufrimiento y el sentido de la vida. Creía que negándome comida y comodidad podría volverme más sabio. Por eso fui al bosque y viví negándome a mí mismo, comiendo solo pequeñas cantidades de alimento cada día. Yo solo comía un plato llamado arroz con leche (kheer), que me daba una mujer del pueblo llamada Sujata. Ella venía todos los días bajo el árbol Bodhi, donde solía sentarme.
 
 Con el paso del tiempo, mi cuerpo se volvió extremadamente débil. Mis huesos se veían a través de la piel, y apenas tenía fuerzas para caminar o meditar. Pensé que pasar por un gran sufrimiento me acercaría a la verdad, pero, en cambio, me dejó exhausto e incapaz de pensar con claridad.
 
-Entonces comprendí algo importante. Pasar hambre no me estaba acercando a la paz ni a la comprensión. Vi que tanto una vida de lujo como una vida de extrema sufrimiento estaban desequilibradas. El verdadero camino era el Camino del Medio: una vida de equilibrio, ni demasiado estricta ni demasiado fácil.
+Entonces comprendí algo importante. Pasar hambre no me estaba acercando a la paz ni a la comprensión. Vi que tanto una vida de lujo como una vida de sufrimiento extremo estaban desequilibradas. El verdadero camino era el Camino del Medio: una vida de equilibrio, ni demasiado estricta ni demasiado fácil.
 
 Acepté una comida sencilla para recuperar mis fuerzas. Con un cuerpo sano y una mente concentrada, me senté bajo el árbol Bodhi y continué mi meditación. Allí, por fin, alcancé la realización y me convertí en el Buda.
 
 De esta experiencia aprendí que la verdadera sabiduría no nace de hacernos daño ni de buscar comodidad, sino de vivir con equilibrio, bondad y comprensión. Esa es la lección que sigo compartiendo con el mundo.
 
-El fin` ,
+El fin`,
+
   'en-NG': fullEnglishStory,
+
   'pt-BR': `Antes de ser conhecido como o Buda, eu era Siddhartha Gautama, à procura da verdade sobre a dor e o sentido da vida. Eu acreditava que, negando a mim mesmo comida e conforto, poderia me tornar mais sábio. Por isso, fui para a floresta e vivi me negando, comendo apenas pequenas quantidades de alimento todos os dias. Eu comia apenas um prato chamado arroz doce (kheer), que me era dado por uma mulher do vilarejo chamada Sujata. Ela vinha todos os dias debaixo da árvore Bodhi, onde costumava me sentar.
 
 Com o passar do tempo, o meu corpo tornou-se extremamente fraco. Meus ossos apareciam através da pele, e mal tinha forças para caminhar ou meditar. Achei que passar por grande sofrimento me aproximaria da verdade, mas, em vez disso, me deixou exausto e incapaz de pensar com clareza.
@@ -119,10 +127,11 @@ Aceitei uma refeição simples para recuperar minhas forças. Com um corpo saud�
 
 A partir dessa experiência, aprendi que a verdadeira sabedoria não vem de nos machucarmos nem de buscar conforto, mas de viver com equilíbrio, bondade e compreensão. Essa é a lição que continuo a compartilhar com o mundo.
 
-O fim` ,
+O fim`,
+
   ar: `قبل أن أُعرف باسم البوذا، كنتُ سيدهارثا غوتاما، أبحث عن حقيقة المعاناة ومعنى الحياة. كنت أؤمن أن إنكاري لنفسي الطعام والراحة قد يجعلني أكثر حكمة. لذلك ذهبتُ إلى الغابة وعشتُ منكرًا لنفسي، آخذُ فقط كمياتٍ قليلة من الطعام كل يوم. كنت آكلُ فقط طبقًا يُسمى حلوى الأرز (kheer)، والذي أعطته لي امرأةٌ من القرية اسمها سوجاتا. كانت تأتي كل يوم تحت شجرة بودي التي اعتدتُ أن أجلس عندها.
 
-مع مرور الوقت، أصبح جسمي ضعيفًا جدًا. ظهرت عظامي من خلال جلدي، ولم أكن أملك القوة الكافية للمشي أو التأمل. كنت أظن أن الخوض في معاناة عظيمة سيقربني من الحقيقة، لكن بدلًا من ذلك، تركني منهكًا وغير قادر على التفكير بوضوح.
+مع مرور الوقت، أصبح جسمي ضعيفًا جدًا. ولم أكن أملك القوة الكافية للمشي أو التأمل. كنت أظن أن الخوض في معاناة عظيمة سيقربني من الحقيقة، لكن بدلًا من ذلك، تركني منهكًا وغير قادر على التفكير بوضوح.
 
 ثم أدركتُ شيئًا مهمًا. لم يكن الجوعُ المتواصل يقودني إلى السلام أو الفهم. رأيتُ أن الحياة المترفة وحياة المعاناة الشديدة كلاهما غير متوازن. كان الطريق الحقيقي هو الطريق الأوسط—حياةٌ متوازنة، ليست قاسية جدًا ولا سهلة جدًا.
 
@@ -130,7 +139,8 @@ O fim` ,
 
 من هذه التجربة، تعلمتُ أن الحكمة الحقيقية لا تأتي من إيذاء أنفسنا أو البحث عن الراحة، بل من العيش في توازن، ورحمة، وفهم. هذه هي الرسالة التي أواصل مشاركتها مع العالم.
 
-النهاية` ,
+النهاية`,
+
   'zh-CN': `在我被称为佛陀之前，我是悉达多·乔达摩，寻找关于痛苦和生命意义的真理。我相信，否定自己的食物和舒适，可以让我变得更有智慧。因此，我走进森林，过着自我克制的生活，每天只吃很少的食物。我只吃了一道叫做米饭布丁（kheer）的菜，那是一个叫苏加塔的村庄妇人给我的。她每天都会来到我常坐的菩提树下。
 
 随着时间的推移，我的身体变得极度虚弱。我的骨头透过皮肤显现出来，我几乎没有力量走路或冥想。我原以为经历巨大的苦难会让我更接近真理，但结果却让我精疲力竭，无法清晰思考。
@@ -141,32 +151,35 @@ O fim` ,
 
 从这次经历中，我学到真正的智慧并不是来自伤害自己或追求舒适，而是来自以平衡、善意和理解来生活。这是我一直想与世界分享的教训。
 
-结束` ,
+结束`,
+
   ja: `私は仏陀として知られるようになる前、私は悉達多・ゴータマであり、苦しみと人生の意味について真理を求めていました。私は、自分自身の食べ物と快適さを否定することで、より賢くなれると信じていました。そこで、私は森に入り、自分を抑えつつ、毎日わずかな量の食べ物しか取らない生活を送りました。私は、スジャータという村の女性から与えられた、キールという一皿の料理だけを食べていました。彼女は、私がいつも座っていた菩提樹の下に毎日やってきました。
 
-時が経つにつれ、私の体は極めて弱っていきました。骨が皮膚の下から浮き出し、歩くことも瞑想することもほとんどできませんでした。大きな苦しみを経験することで真理に近づけると考えましたが、逆に、私は疲れ切って、はっきりと考えることができなくなりました。
+時が経つにつれ、私の体は極めて弱っていきました。歩くことも瞑想することもほとんどできませんでした。大きな苦しみを経験することで真理に近づけると考えましたが、逆に、私は疲れ切って、はっきりと考えることができなくなりました。
 
 その後、私は大切なことに気づきました。自分を飢えさせることは、平和や理解へと導いてくれませんでした。私は、贅沢な生活も、極端な苦しみの生活も、どちらもバランスが取れていないことを知りました。真の道は中道であり、厳しすぎず、易しすぎない、バランスの取れた生き方でした。
 
 私は力を取り戻すために、シンプルな食事を受け入れました。健康な身体と集中した心を持って、私は菩提樹の下に座り、瞑想を続けました。そこにおいて、私はついに覚醒を得て、仏陀となりました。
 
-この経験から、私は真の知恵は、私たち自身を傷つけたり、快適さを求めたりすることからではなく、バランス、優しさ、理解をもって生きることから来ると学びました。これこそが、私は世界と共有し続ける教えです。
+この経験から、私は真の知恵は、私たち自身を傷つけたり、快適さを求めたりすることからではなく、バランス、優しさ、理解をもって生きることから来ると学びました。
 
-終わり` ,
+終わり`,
+
   ko: `나는 부처로 알려지기 전에는 싯다르타 고타마였고, 고통과 삶의 의미에 대해 진리를 찾고 있었습니다. 나는 자신에게 음식과 편안함을 거부함으로써 더 현명해질 수 있다고 믿었습니다. 그래서 나는 숲으로 들어가 스스로를 절제하며, 매일 아주 적은 양의 음식만 먹으며 살았습니다. 나는 수자타라는 마을 여자가 준 키르라는 한 그릇의 음식을 먹었습니다. 그녀는 내가 자주 앉아 있던 보디 나무 아래로 매일 찾아왔습니다.
 
-시간이 지나면서, 내 몸은 극도로 약해졌습니다. 뼈가 피부를 통해 드러나고, 걷거나 명상할 힘조차 거의 남지 않았습니다. 큰 고통을 겪는 것이 진리에 더 가깝게 해줄 것이라고 생각했지만, 오히려 나는 지쳐버렸고, 분명하게 생각하지 못하게 되었습니다.
+시간이 지나면서, 내 몸은 극도로 약해졌습니다. 걷거나 명상할 힘조차 거의 남지 않았습니다. 큰 고통을 겪는 것이 진리에 더 가깝게 해줄 것이라고 생각했지만, 오히려 나는 지쳐버렸고, 분명하게 생각하지 못하게 되었습니다.
 
 그 뒤에 나는 중요한 것을 깨달았습니다. 스스로를 굶주리게 하는 것은 평화나 이해로 이끌지 않았습니다. 나는 사치스러운 삶과 극단적인 고통의 삶이 모두 균형이 없다는 것을 보았습니다. 진정한 길은 중도였고, 너무 엄격하지도 너무 쉬우지도 않은 균형 잡힌 삶이었습니다.
 
 나는 힘을 되찾기 위해 간단한 식사를 받아들였습니다. 건강한 몸과 집중된 마음으로, 나는 보디 나무 아래에 앉아 명상을 계속했습니다. 그곳에서 나는 마침내 깨달음을 얻고 부처가 되었습니다.
 
-이 경험을 통해 나는 진정한 지혜가 우리 자신을 해치거나 안락을 찾는 데서 오는 것이 아니라, 균형과 kindness, 이해를 가지고 사는 데서 온다는 것을 배웠습니다. 이것이 내가 세상과 계속 나누고 싶은 가르침입니다.
+이 경험을 통해 나는 진정한 지혜가 우리 자신을 해치거나 안락을 찾는 데서 오는 것이 아니라, 균형과 친절, 이해를 가지고 사는 데서 온다는 것을 배웠습니다. 이것이 내가 세상과 계속 나누고 싶은 가르침입니다.
 
-끝` ,
+끝`,
+
   fr: `Avant d’être connu sous le nom du Bouddha, j’étais Siddhartha Gautama, à la recherche de la vérité sur la souffrance et le sens de la vie. Je croyais qu’en me privant de nourriture et de confort, je pourrais devenir plus sage. C’est pourquoi je suis allé dans la forêt et j’ai vécu en me privant de tout, ne mangeant chaque jour que de très petites quantités de nourriture. Je ne mangeais qu’un seul plat appelé le kheer, qui m’avait été donné par une femme du village nommée Sujata. Elle venait chaque jour sous l’arbre Bodhi, là où j’avais l’habitude de m’asseoir.
 
-Au fil du temps, mon corps devint extrêmement faible. Mes os se voyaient à travers ma peau, et j’avais à peine la force de marcher ou de méditer. Je pensais qu’affronter une grande souffrance me rapprocherait de la vérité, mais au lieu de cela, elle me laissait épuisé et incapable de penser clairement.
+Au fil du temps, mon corps devint extrêmement faible. J’avais à peine la force de marcher ou de méditer. Je pensais qu’affronter une grande souffrance me rapprocherait de la vérité, mais au lieu de cela, elle me laissait épuisé et incapable de penser clairement.
 
 Puis je compris quelque chose d’important. Me priver de nourriture ne me conduisait ni à la paix ni à la compréhension. J’ai vu que tant une vie de luxe qu’une vie de souffrance extrême étaient déséquilibrées. Le vrai chemin était le Milieu — une vie d’équilibre, ni trop stricte ni trop facile.
 
@@ -174,10 +187,11 @@ J’ai accepté un simple repas pour retrouver mes forces. Avec un corps sain et
 
 Grâce à cette expérience, j’ai appris que la vraie sagesse ne vient ni de nous blesser ni de chercher le confort, mais de vivre dans l’équilibre, la bonté et la compréhension. C’est la leçon que je continue de partager avec le monde.
 
-La fin` ,
+La fin`,
+
   de: `Bevor ich als der Buddha bekannt wurde, war ich Siddhartha Gautama und suchte nach der Wahrheit über das Leiden und den Sinn des Lebens. Ich glaubte, dass ich durch den Verzicht auf Nahrung und Komfort weiser werden könnte. Deshalb ging ich in den Wald und lebte in Selbstverleugnung, wobei ich jeden Tag nur sehr kleine Mengen an Nahrung zu mir nahm. Ich aß nur ein Gericht namens Kheer, das mir eine Frau aus dem Dorf namens Sujata gegeben hatte. Sie kam jeden Tag unter den Bodhi-Baum, wo ich zu sitzen pflegte.
 
-Mit der Zeit wurde mein Körper extrem schwach. Meine Knochen traten durch meine Haut hervor, und ich hatte kaum noch die Kraft zum Gehen oder Meditieren. Ich dachte, dass großes Leid mich der Wahrheit näher bringen würde, aber stattdessen ließ es mich erschöpft und unfähig zurück, klar zu denken.
+Mit der Zeit wurde mein Körper extrem schwach. Ich hatte kaum noch die Kraft zum Gehen oder Meditieren. Ich dachte, dass großes Leid mich der Wahrheit näher bringen würde, aber stattdessen ließ es mich erschöpft und unfähig zurück, klar zu denken.
 
 Dann erkannte ich etwas Wichtiges. Mich selbst hungern zu lassen führte mich weder zu Frieden noch zu Verständnis. Ich sah, dass sowohl ein Leben des Luxus als auch ein Leben extremen Leidens ungleichgewichtig waren. Der wahre Weg war der Mittlere Weg — ein Leben im Gleichgewicht, weder zu streng noch zu leicht.
 
@@ -185,10 +199,11 @@ Ich nahm eine einfache Mahlzeit an, um meine Kraft zurückzugewinnen. Mit einem 
 
 Durch diese Erfahrung lernte ich, dass wahre Weisheit nicht aus dem Verletzen selbst oder dem Suchen nach Komfort kommt, sondern aus dem Leben im Gleichgewicht, in Güte und im Verständnis. Das ist die Lehre, die ich weiter mit der Welt teile.
 
-Das Ende` ,
+Das Ende`,
+
   it: `Prima di essere conosciuto come il Buddha, ero Siddhartha Gautama, alla ricerca della verità sul dolore e sul significato della vita. Credevo che privandomi di cibo e comfort potessi diventare più saggio. Per questo entrai nella foresta e vissi in rinuncia a me stesso, mangiando solo piccole quantità di cibo ogni giorno. Mangiai solo un piatto chiamato kheer, che mi era stato dato da una donna del villaggio di nome Sujata. Lei veniva ogni giorno sotto l’albero di Bodhi, dove ero solito sedermi.
 
-Col passare del tempo, il mio corpo divenne estremamente debole. Le mie ossa si vedevano attraverso la pelle e avevo a malapena la forza di camminare o meditare. Pensavo che sopportare grandi sofferenze mi avrebbe avvicinato alla verità, ma invece mi lasciò esausto e incapace di pensare chiaramente.
+Col passare del tempo, il mio corpo divenne estremamente debole. Avevo a malapena la forza di camminare o meditare. Pensavo che sopportare grandi sofferenze mi avrebbe avvicinato alla verità, ma invece mi lasciò esausto e incapace di pensare chiaramente.
 
 Poi capii qualcosa di importante. Farmi morire di fame non mi stava portando né alla pace né alla comprensione. Vidi che sia una vita di lusso sia una vita di sofferenza estrema erano sbilanciate. Il vero cammino era la Via di Mezzo — una vita di equilibrio, né troppo rigida né troppo facile.
 
@@ -196,21 +211,23 @@ Accettai un pasto semplice per recuperare le forze. Con un corpo sano e una ment
 
 Da questa esperienza, imparai che la vera saggezza non viene dal farci del male o dal cercare comfort, ma dal vivere con equilibrio, gentilezza e comprensione. Questa è la lezione che continuo a condividere con il mondo.
 
-La fine` ,
+La fine`,
+
   'es-MX': `Antes de ser conocido como el Buda, yo era Siddhartha Gautama, buscando la verdad sobre el sufrimiento y el sentido de la vida. Creía que negándome comida y comodidad podría volverme más sabio. Por eso fui al bosque y viví negándome a mí mismo, comiendo solo pequeñas cantidades de alimento cada día. Yo solo comía un platillo llamado arroz con leche (kheer), que me daba una mujer del pueblo llamada Sujata. Ella venía todos los días bajo el árbol Bodhi, donde solía sentarme.
 
-Con el paso del tiempo, mi cuerpo se volvió extremadamente débil. Mis huesos se veían a través de la piel, y apenas tenía fuerzas para caminar o meditar. Pensé que pasar por un gran sufrimiento me acercaría a la verdad, pero, en cambio, me dejó exhausto e incapaz de pensar con claridad.
+Con el paso del tiempo, mi cuerpo se volvió extremadamente débil. Apenas tenía fuerzas para caminar o meditar. Pensé que pasar por un gran sufrimiento me acercaría a la verdad, pero, en cambio, me dejó exhausto e incapaz de pensar con claridad.
 
 Entonces comprendí algo importante. Pasar hambre no me estaba acercando a la paz ni a la comprensión. Vi que tanto una vida de lujo como una vida de sufrimiento extremo estaban desequilibradas. El verdadero camino era el Camino del Medio: una vida de equilibrio, ni demasiado estricta ni demasiado fácil.
 
 Acepté una comida sencilla para recuperar mis fuerzas. Con un cuerpo sano y una mente concentrada, me senté bajo el árbol Bodhi y continué mi meditación. Allí, por fin, alcancé la realización y me convertí en el Buda.
 
 De esta experiencia aprendí que la verdadera sabiduría no nace de hacernos daño ni de buscar comodidad, sino de vivir con equilibrio, bondad y comprensión. Esa es la lección que sigo compartiendo con el mundo.
-6
-El fin` ,
+
+El fin`,
+
   ru: `До того как меня стали называть Буддой, я был Сиддхартхой Гаутамой, ищущим истину о страдании и смысле жизни. Я верил, что отказав себе в пище и удобстве, смогу стать мудрее. Поэтому я ушёл в лес и жил в самоподавлении, принимая каждый день лишь очень небольшое количество пищи. Я ел только одно блюдо, называемое кхир, которое мне давала женщина из деревни по имени Суджата. Она приходила каждый день под дерево Бодхи, где я обычно сидел.
 
-С течением времени моё тело стало чрезвычайно слабым. Кости проступали сквозь кожу, и у меня почти не оставалось сил идти или медитировать. Я думал, что переживание великого страдания приблизит меня к истине, но вместо этого оно оставило меня изнурённым и неспособным ясно мыслить.
+С течением времени моё тело стало чрезвычайно слабым. У меня почти не оставалось сил идти или медитировать. Я думал, что переживание великого страдания приблизит меня к истине, но вместо этого оно оставило меня изнурённым и неспособным ясно мыслить.
 
 Тогда я понял нечто важное. Голодание не вело меня ни к миру, ни к пониманию. Я увидел, что как жизнь в роскоши, так и жизнь в крайнем страдании были несбалансированны. Настоящий путь был Срединным путём — жизнью равновесия, не слишком строгой и не слишком лёгкой.
 
@@ -218,21 +235,23 @@ El fin` ,
 
 Из этого опыта я узнал, что истинная мудрость приходит не от причинения вреда себе или поиска комфорта, а от жизни в равновесии, доброте и понимании. Это урок, который я продолжаю передавать миру.
 
-Конец` ,
+Конец`,
+
   ta: `புத்தர் என்ற பெயரில் அறியப்படுவதற்கு முன், நான் சித்தார்த்த கௌதமன். துன்பம் மற்றும் வாழ்க்கையின் பொருள் பற்றிய உண்மையைத் தேடிக் கொண்டிருந்தேன். நான் தானே உணவு மற்றும் வசதியை மறுத்துக் கொண்டால், நான் அதிக ஞானியாகலாம் என்று நம்பினேன். ஆகவே, நான் காடுக்குள் சென்றேன்; தன்னை மறுத்து வாழ்ந்தேன்; ஒவ்வொரு நாளும் மிகச் சிறிய அளவு உணவை மட்டுமே உட்கொண்டேன். நான் கீர் என்ற ஒரு உணவை மட்டுமே சாப்பிட்டேன்; அது சுஜாதா என்ற கிராமத்து பெண்ணிடமிருந்து எனக்குக் கொடுக்கப்பட்டது. அவள் நான் வழக்கமாக அமர்ந்துகொண்டிருந்த போதி மரத்தின் கீழ் தினமும் வந்தாள்.
 
-காலப்போக்கில், என் உடல் மிகவும் பலவீனமாகியது. என் எலும்புகள் தோலில் தெரியும் அளவுக்கு இருந்தன; நடக்கவோ தியானம் செய்யவோ எனக்கு பெரும்பாலும் சக்தி இல்லை. பெரிய துன்பத்தை அனுபவிப்பது உண்மைக்கு நெருக்கமாக கொண்டு வரும் என்று நினைத்தேன்; ஆனால் அதற்கு மாறாக அது என்னை மிகவும் சோர்வடையச் செய்து, தெளிவாக சிந்திக்க முடியாதவனாக்கியது.
+காலப்போக்கில், என் உடல் மிகவும் பலவீனமாகியது. நடக்கவோ தியானம் செய்யவோ எனக்கு பெரும்பாலும் சக்தி இல்லை. பெரிய துன்பத்தை அனுபவிப்பது உண்மைக்கு நெருக்கமாக கொண்டு வரும் என்று நினைத்தேன்; ஆனால் அதற்கு மாறாக அது என்னை மிகவும் சோர்வடையச் செய்து, தெளிவாக சிந்திக்க முடியாதவனாக்கியது.
 
-பின்னர் நான் ஒரு முக்கியமான விஷயத்தை உணர்ந்தேன். என்னைச் சாகடித்துக் கொண்டிருப்பது அமைதி அல்லது புரிதலுக்கு கொண்டு செல்லவில்லை. ஆடம்பரமான வாழ்க்கையும் தீவிர துன்பத்தின் வாழ்க்கையும் சமச்சீரற்றவை என்பதைக் கண்டேன். உண்மையான பாதை நடுத்தர caminho — மிகக் கடுமையானதும் அல்ல, மிக இலகுவானதும் அல்ல, சமநிலையான வாழ்க்கை.
+பின்னர் நான் ஒரு முக்கியமான விஷயத்தை உணர்ந்தேன். என்னைச் சாகடித்துக் கொண்டிருப்பது அமைதி அல்லது புரிதலுக்கு கொண்டு செல்லவில்லை. ஆடம்பரமான வாழ்க்கையும் தீவிர துன்பத்தின் வாழ்க்கையும் சமச்சீரற்றவை என்பதைக் கண்டேன். உண்மையான பாதை நடுத்தர பாதை — மிகக் கடுமையானதும் அல்ல, மிக இலகுவானதும் அல்ல, சமநிலையான வாழ்க்கை.
 
-என் வலிமையை மீண்டும் பெறுவதற்காக நான் ஒரு எளிய உணவை ஏற்றுக்கொண்டேன். ஆரோக்கியமான உடலையும் 집중மான மனத்தையும் கொண்டவனாக, நான் போதி மரத்தின் கீழ் அமர்ந்து தியானத்தை தொடர்ந்தேன். அங்கே, இறுதியில் நான் ஞானத்தை அடைந்து புத்தரானேன்.
+என் வலிமையை மீண்டும் பெறுவதற்காக நான் ஒரு எளிய உணவை ஏற்றுக்கொண்டேன். ஆரோக்கியமான உடலையும் கவனம் செலுத்திய மனத்தையும் கொண்டவனாக, நான் போதி மரத்தின் கீழ் அமர்ந்து தியானத்தை தொடர்ந்தேன். அங்கே, இறுதியில் நான் ஞானத்தை அடைந்து புத்தரானேன்.
 
 இந்த அனுபவத்திலிருந்து, உண்மையான ஞானம் நம்மைத் துன்புறுத்துவதிலோ அல்லது வசதியைத் தேடுவதிலோ இல்லை; சமநிலை, கிருபை, புரிதல் ஆகியவற்றுடன் வாழ்வதில்தான் உள்ளது என்பதைப் புரிந்துகொண்டேன். இது தான் நான் உலகத்துடன் பகிர்ந்து கொண்டிருக்கும் போதனை.
 
-முடிவு` ,
+முடிவு`,
+
   vi: `Trước khi được biết đến như Đức Phật, tôi là Siddhartha Gautama, tìm kiếm sự thật về nỗi đau và ý nghĩa của cuộc sống. Tôi tin rằng nếu tự mình từ chối thức ăn và sự thoải mái, tôi có thể trở nên khôn ngoan hơn. Vì thế, tôi đã đi vào rừng và sống trong sự tự kiềm chế, mỗi ngày chỉ ăn một lượng rất nhỏ thức ăn. Tôi chỉ ăn một món gọi là kheer, được một người phụ nữ làng tên Sujata đưa cho tôi. Bà ấy đến mỗi ngày dưới gốc cây Bodhi nơi tôi thường ngồi.
 
-Theo thời gian, cơ thể tôi trở nên vô cùng yếu ớt. Xương của tôi lộ ra qua da, và tôi gần như không còn sức lực để đi lại hay thiền định. Tôi nghĩ rằng trải qua một nỗi đau lớn sẽ đưa tôi gần hơn đến sự thật, nhưng thay vào đó, nó khiến tôi kiệt sức và không thể suy nghĩ rõ ràng.
+Theo thời gian, cơ thể tôi trở nên vô cùng yếu ớt. Tôi gần như không còn sức lực để đi lại hay thiền định. Tôi nghĩ rằng trải qua một nỗi đau lớn sẽ đưa tôi gần hơn đến sự thật, nhưng thay vào đó, nó khiến tôi kiệt sức và không thể suy nghĩ rõ ràng.
 
 Sau đó, tôi nhận ra một điều quan trọng. Cứ làm mình đói khát không hề dẫn tôi đến bình an hay hiểu biết. Tôi thấy rằng cả cuộc sống xa hoa lẫn cuộc sống đầy đau khổ cực đoan đều thiếu cân bằng. Con đường thật sự là Con đường Trung dung — một cuộc sống hài hòa, không quá nghiêm khắc cũng không quá dễ dàng.
 
@@ -253,8 +272,8 @@ let isPlaying = false;
 let spanElements = [];
 let currentStory = storiesByLanguage[currentLanguage];
 let highlightTimer = null;
-let highlightStartTime = 0;
 let currentQuestionIndex = null;
+
 const questions = [
   {
     question: "Q1. For how long did Buddha fast?",
@@ -273,55 +292,57 @@ const questions = [
     answer: "Yes. Siddhartha Gautama was married to Yashodhara and they had a son named Rahula."
   },
   {
-    question: "Q5. what were the favorite sports of siidhartha gautama?",
-    answer: "archery,chess,kabaddi,dice games,pick up sticks,hopscotch,and martial arts were his favorite sports."
+    question: "Q5. What were the favorite sports of Siddhartha Gautama?",
+    answer: "Archery, chess, kabaddi, dice games, pick-up sticks, hopscotch, and martial arts were among the activities associated with Siddhartha."
   },
   {
-    question: "Q6.who was siddhartha buddha ?",
-    answer: "sidhartha gautama was the founder of the religion buddhisms."
+    question: "Q6. Who was Siddhartha Buddha?",
+    answer: "Siddhartha Gautama was the founder of Buddhism."
   },
   {
-    question: "Q7.Where was Siddhartha Buddha born ?",
-    answer: "He was born in Lumbini in nepal."
+    question: "Q7. Where was Siddhartha Buddha born?",
+    answer: "He was born in Lumbini in present-day Nepal."
   },
   {
-    question: "Q9.what was siddhartha's mother's name ?",
-    answer: "her name was maya and she was a queen."
+    question: "Q9. What was Siddhartha's mother's name?",
+    answer: "Her name was Maya, and she was a queen."
   },
   {
-    question: "Q10.what was siddhartha's father's name ?",
-    answer: "his name was shuddhodana and he was a king."
+    question: "Q10. What was Siddhartha's father's name?",
+    answer: "His name was Shuddhodana, and he was a king."
   },
- {
-    question: "Q11.Under which tree did Siddhartha attain enlightenment?",
+  {
+    question: "Q11. Under which tree did Siddhartha attain enlightenment?",
     answer: "He attained enlightenment under the Bodhi Tree."
   },
   {
-    question: "Q12.what is buddhism?",
-    answer: "Buddhism is the religion based on the teachings of Gautama Buddha."
-  },
-]
+    question: "Q12. What is Buddhism?",
+    answer: "Buddhism is a religion and philosophical tradition based on the teachings of Gautama Buddha."
+  }
+];
+
 function buildStoryText() {
-  // Legacy word-level highlighting removed for slide-based presentation.
   buildSlides();
 }
-function addWordClickListeners() {
-  spanElements.forEach((span) => {
-    span.style.cursor = 'pointer';
-    span.addEventListener('click', () => {
-      const wordIndex = Number(span.dataset.index);
-      playFromWordIndex(wordIndex);
-    });
-  });
-}
+
 function showScreen(screen) {
-  introScreen.classList.toggle('active', screen === 'intro');
-  storyScreen.classList.toggle('active', screen === 'story');
-  questionScreen.classList.toggle('active', screen === 'question');
+  if (introScreen) {
+    introScreen.classList.toggle('active', screen === 'intro');
+  }
+
+  if (storyScreen) {
+    storyScreen.classList.toggle('active', screen === 'story');
+  }
+
+  if (questionScreen) {
+    questionScreen.classList.toggle('active', screen === 'question');
+  }
 }
 
 function resetHighlights() {
-  spanElements.forEach((span) => span.classList.remove('active'));
+  spanElements.forEach((span) => {
+    span.classList.remove('active');
+  });
 }
 
 function stopHighlightSync() {
@@ -330,31 +351,39 @@ function stopHighlightSync() {
     highlightTimer = null;
   }
 }
+
 function startHighlightSync() {
   stopHighlightSync();
 
-  // Fallback sync only if onboundary isn't firing
-  // Use a longer interval for safety (don't interfere with onboundary)
   highlightTimer = window.setInterval(() => {
     if (!speechSynthesis.speaking || speechSynthesis.paused) {
       return;
     }
-    updateProgressBar(); // Just update the progress bar, don't change word index
+
+    updateProgressBar();
   }, 500);
 }
 
-
-
 function stopSpeech() {
-  if (speechSynthesis.speaking || speechSynthesis.pending || speechSynthesis.paused) {
+  if (
+    speechSynthesis.speaking ||
+    speechSynthesis.pending ||
+    speechSynthesis.paused
+  ) {
     speechSynthesis.cancel();
   }
+
   stopHighlightSync();
+
   isPlaying = false;
   updatePlayState();
 }
 
 function updatePlayState() {
+  if (!playButton || !pauseButton) {
+    return;
+  }
+
   playButton.classList.toggle('hidden', isPlaying);
   pauseButton.classList.toggle('hidden', !isPlaying);
 }
@@ -363,221 +392,324 @@ function formatTime(seconds) {
   const safeSeconds = Math.max(0, Math.round(seconds));
   const mins = Math.floor(safeSeconds / 60);
   const secs = safeSeconds % 60;
+
   return `${mins}:${secs.toString().padStart(2, '0')}`;
 }
 
 function updateProgressBar() {
+  if (!progressSlider) return;
+
   if (slides && slides.length > 1) {
-    const progressPercent = (currentSlide / Math.max(1, slides.length - 1)) * 100;
-    progressSlider.value = Math.min(100, Math.max(0, progressPercent));
-    progressText.textContent = `Slide ${currentSlide + 1} / ${slides.length}`;
+    const progressPercent =
+      (currentSlide / Math.max(1, slides.length - 1)) * 100;
+
+    progressSlider.value = Math.min(
+      100,
+      Math.max(0, progressPercent)
+    );
+
+    if (progressText) {
+      progressText.textContent =
+        `Slide ${currentSlide + 1} / ${slides.length}`;
+    }
   } else {
     const words = currentStory.trim().split(/\s+/);
     const totalWords = Math.max(1, words.length);
-    const progressPercent = (currentWordIndex / totalWords) * 100;
-    progressSlider.value = Math.min(100, Math.max(0, progressPercent));
+    const progressPercent =
+      (currentWordIndex / totalWords) * 100;
+
+    progressSlider.value = Math.min(
+      100,
+      Math.max(0, progressPercent)
+    );
   }
-  speedLabel.textContent = `${voiceRate.toFixed(2)}x`;
+
+  if (speedLabel) {
+    speedLabel.textContent = `${voiceRate.toFixed(2)}x`;
+  }
 }
 
 function showQuestionScreen() {
+  stopHighlightSync();
+  isPlaying = false;
+  updatePlayState();
+
   showScreen('question');
   buildQuestionList();
-  thankYouMessage.classList.add('hidden');
+
+  if (thankYouMessage) {
+    thankYouMessage.classList.add('hidden');
+  }
 }
 
-// --- Slide-based presentation logic ---
 let slides = [];
 let currentSlide = 0;
 let currentWordStartIndices = [];
 
 function splitIntoSentences(text) {
   const flat = text.replace(/\n+/g, ' ').trim();
+
   const parts = flat.split(/(?<=[\.\?!])\s+/);
+
   return parts.filter(Boolean);
 }
 
 function buildSlides() {
-  currentStory = storiesByLanguage[currentLanguage] || fullEnglishStory;
+  currentStory =
+    storiesByLanguage[currentLanguage] || fullEnglishStory;
+
   slides = splitIntoSentences(currentStory);
+
   if (slides.length < 2) {
-    slides = currentStory.split(/\n\s*\n/).map(s => s.trim()).filter(Boolean);
+    slides = currentStory
+      .split(/\n\s*\n/)
+      .map((s) => s.trim())
+      .filter(Boolean);
   }
-  currentSlide = 0;
+
+  currentSlide = Math.min(
+    currentSlide,
+    Math.max(0, slides.length - 1)
+  );
+
   renderSlide();
 }
 
 function renderSlide() {
   const total = slides.length;
   const text = slides[currentSlide] || '';
-  // build per-word spans for highlighting
+
   const words = text.split(/\s+/).filter(Boolean);
+
   currentWordStartIndices = [];
+
   let cursor = 0;
+
   const html = words
-    .map((w, i) => {
-      const escaped = w.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    .map((word, index) => {
+      const escaped = word
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+
       currentWordStartIndices.push(cursor);
-      cursor += w.length + 1; // +1 for the space separator
-      return `<span data-index="${i}">${escaped}</span>`;
+
+      cursor += word.length + 1;
+
+      return `<span data-index="${index}">${escaped}</span>`;
     })
     .join(' ');
-  storyText.innerHTML = html;
-  spanElements = Array.from(storyText.querySelectorAll('span'));
+
+  if (storyText) {
+    storyText.innerHTML = html;
+  }
+
+  spanElements = storyText
+    ? Array.from(storyText.querySelectorAll('span'))
+    : [];
+
   resetHighlights();
-  progressText.textContent = `Slide ${currentSlide + 1} / ${total}`;
+
+  if (progressText) {
+    progressText.textContent =
+      `Slide ${currentSlide + 1} / ${total}`;
+  }
+
   const prev = document.getElementById('prevSlide');
   const next = document.getElementById('nextSlide');
-  if (prev) prev.disabled = currentSlide <= 0;
-  if (next) next.disabled = currentSlide >= total - 1;
+
+  if (prev) {
+    prev.disabled = currentSlide <= 0;
+  }
+
+  if (next) {
+    next.disabled = currentSlide >= total - 1;
+  }
+
+  updateProgressBar();
 }
 
 function nextSlide() {
   if (currentSlide < slides.length - 1) {
+    stopSpeech();
+
     currentSlide++;
+
     renderSlide();
-    if (isPlaying) speakCurrentSlide();
+
+    if (isPlaying) {
+      speakCurrentSlide();
+    }
   }
 }
 
 function prevSlide() {
   if (currentSlide > 0) {
+    stopSpeech();
+
     currentSlide--;
+
     renderSlide();
-    if (isPlaying) speakCurrentSlide();
+
+    if (isPlaying) {
+      speakCurrentSlide();
+    }
   }
 }
 
 function speakCurrentSlide() {
+  if (!('speechSynthesis' in window)) {
+    alert('Speech synthesis is not supported in this browser.');
+    return;
+  }
+
   stopSpeech();
+
   const text = slides[currentSlide] || '';
-  // set up word-boundary highlighting
+
+  if (!text) {
+    return;
+  }
+
+  utterance = new SpeechSynthesisUtterance(text);
+
+  utterance.lang =
+    languageLocaleMap[currentLanguage] || 'en-US';
+
+  utterance.rate = voiceRate;
+  utterance.volume = volume;
+  utterance.pitch =
+    activeVoice === 'female' ? 1.15 : 0.85;
+
+  const selectedVoice =
+    getVoiceForLanguage(currentLanguage);
+
+  if (selectedVoice) {
+    utterance.voice = selectedVoice;
+  }
+
   utterance.onstart = () => {
     isPlaying = true;
     updatePlayState();
   };
+
   utterance.onboundary = (event) => {
-    if (!event.charIndex && event.charIndex !== 0) return;
+    if (event.name !== 'word') {
+      return;
+    }
+
     try {
-      let idx = 0;
-      for (let i = currentWordStartIndices.length - 1; i >= 0; i--) {
-        if (currentWordStartIndices[i] <= event.charIndex) {
-          idx = i;
-          break;
-        }
-      }
-      highlightWord(idx);
+      const wordsBefore = text
+        .slice(0, event.charIndex)
+        .trim()
+        .split(/\s+/)
+        .filter(Boolean);
+
+      const wordIndex =
+        Math.max(0, wordsBefore.length - 1);
+
+      highlightWord(wordIndex);
       updateProgressBar();
-    } catch (e) {
-      console.error('boundary highlight error', e);
+    } catch (error) {
+      console.error('Boundary error:', error);
     }
   };
+
   utterance.onend = () => {
     isPlaying = false;
     updatePlayState();
+
     resetHighlights();
-    // automatically advance to next slide if not last
+
     if (currentSlide < slides.length - 1) {
       currentSlide++;
+
       renderSlide();
-      // autoplay next slide
+
+      // Automatically speak the next slide
       speakCurrentSlide();
     } else {
-      // finished story
       showQuestionScreen();
     }
   };
-  speechSynthesis.speak(utterance);
-    found = voices.find(v => v.lang && v.lang.toLowerCase().startsWith((utterance.lang || '').toLowerCase()));
-    if (!found) {
-      found = voices.find(v => v.name.toLowerCase().includes(selectedVoice.toLowerCase()));
-    }
-    if (found) utterance.voice = found;
-  }
-  utterance.onstart = () => {
-    isPlaying = true;
-    updatePlayState();
-  };
-  utterance.onend = () => {
+
+  utterance.onerror = (event) => {
+    console.error('Speech error:', event);
+
     isPlaying = false;
     updatePlayState();
   };
+
   speechSynthesis.speak(utterance);
-  {}
 
-function wireUI() {
-  const prev = document.getElementById('prevSlide');
-  const next = document.getElementById('nextSlide');
-
-  if (prev) prev.addEventListener('click', prevSlide);
-  if (next) next.addEventListener('click', nextSlide);
-  playButton.addEventListener('click', () => { speakCurrentSlide(); });
-  pauseButton.addEventListener('click', () => { stopSpeech(); });
-  languageSelect.addEventListener('change', () => {
-    currentLanguage = languageSelect.value;
-    buildSlides();
-  });
-  speedSelect.addEventListener('change', () => { voiceRate = parseFloat(speedSelect.value) || 1; });
-  volumeSlider.addEventListener('input', () => { volume = (Number(volumeSlider.value) || 100) / 100; });
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowRight') nextSlide();
-    if (e.key === 'ArrowLeft') prevSlide();
-  });
+  isPlaying = true;
+  updatePlayState();
+  updateProgressBar();
 }
-
-function populateVoices() {
-  const voices = speechSynthesis.getVoices();
-  voiceSelect.innerHTML = '';
-  voices.forEach(v => {
-    const opt = document.createElement('option');
-    opt.value = v.name;
-    opt.textContent = `${v.name} — ${v.lang}`;
-    voiceSelect.appendChild(opt);
-  });
-  if (!voiceSelect.value && voices[0]) voiceSelect.value = voices[0].name;
-}
-
-window.addEventListener('DOMContentLoaded', () => {
-  populateVoices();
-  speechSynthesis.onvoiceschanged = populateVoices;
-  buildSlides();
-  wireUI();
-});
 
 function buildQuestionList() {
+  if (!questionList) {
+    return;
+  }
+
   questionList.innerHTML = questions
-    .map((item, index) => `
-      <div class="question-card">
-        <button type="button" data-index="${index}">${item.question}</button>
-      </div>
-    `)
+    .map(
+      (item, index) => `
+        <div class="question-card">
+          <button type="button" data-index="${index}">
+            ${item.question}
+          </button>
+        </div>
+      `
+    )
     .join('');
 
-  questionList.querySelectorAll('button').forEach((button) => {
-    button.addEventListener('click', () => {
-      const index = Number(button.dataset.index);
-      speakAnswer(index);
+  questionList
+    .querySelectorAll('button')
+    .forEach((button) => {
+      button.addEventListener('click', () => {
+        const index = Number(button.dataset.index);
+
+        speakAnswer(index);
+      });
     });
-  });
 }
 
 function speakAnswer(index) {
   const answerText = questions[index]?.answer;
-  if (!answerText) return;
+
+  if (!answerText) {
+    return;
+  }
 
   currentQuestionIndex = index;
+
   stopSpeech();
-  const responseUtterance = new SpeechSynthesisUtterance(answerText);
-  responseUtterance.lang = languageLocaleMap[currentLanguage] || 'en-US';
+
+  const responseUtterance =
+    new SpeechSynthesisUtterance(answerText);
+
+  responseUtterance.lang =
+    languageLocaleMap[currentLanguage] || 'en-US';
+
   responseUtterance.rate = voiceRate;
   responseUtterance.volume = volume;
-  responseUtterance.pitch = activeVoice === 'female' ? 1.15 : 0.85;
-  const selectedVoice = getVoiceForLanguage(currentLanguage);
-  if (selectedVoice) responseUtterance.voice = selectedVoice;
+  responseUtterance.pitch =
+    activeVoice === 'female' ? 1.15 : 0.85;
+
+  const selectedVoice =
+    getVoiceForLanguage(currentLanguage);
+
+  if (selectedVoice) {
+    responseUtterance.voice = selectedVoice;
+  }
 
   responseUtterance.onend = () => {
     currentQuestionIndex = null;
-    thankYouMessage.classList.add('hidden');
+
+    if (thankYouMessage) {
+      thankYouMessage.classList.add('hidden');
+    }
   };
 
   responseUtterance.onerror = () => {
@@ -589,13 +721,22 @@ function speakAnswer(index) {
 
 function finishQuestions() {
   stopSpeech();
-  thankYouMessage.classList.remove('hidden');
+
+  if (thankYouMessage) {
+    thankYouMessage.classList.remove('hidden');
+  }
 }
 
 function getVoiceForLanguage(languageCode) {
   const voices = speechSynthesis.getVoices();
-  const normalized = String(languageCode).toLowerCase();
-  const hints = [normalized, normalized.split('-')[0]];
+
+  const normalized =
+    String(languageCode).toLowerCase();
+
+  const hints = [
+    normalized,
+    normalized.split('-')[0]
+  ];
 
   if (normalized.includes('pt')) hints.push('pt');
   if (normalized.includes('es')) hints.push('es');
@@ -614,18 +755,44 @@ function getVoiceForLanguage(languageCode) {
 
   const preferredVoice = voices.find((voice) => {
     const lang = voice.lang.toLowerCase();
-    const matchesLanguage = hints.some((hint) => hint && lang.startsWith(hint));
-    if (!matchesLanguage) return false;
 
-    const name = `${voice.name} ${voice.lang}`.toLowerCase();
-    if (activeVoice === 'female') {
-      return /female|woman|samantha|zira|victoria|jessa|susan|anna|maya|alloy|jenny/i.test(name);
+    const matchesLanguage = hints.some(
+      (hint) =>
+        hint && lang.startsWith(hint)
+    );
+
+    if (!matchesLanguage) {
+      return false;
     }
 
-    return /male|man|daniel|alex|david|mark|matthew|hans|paul|quinn/i.test(name);
+    const name =
+      `${voice.name} ${voice.lang}`.toLowerCase();
+
+    if (activeVoice === 'female') {
+      return /female|woman|samantha|zira|victoria|jessa|susan|anna|maya|alloy|jenny/i.test(
+        name
+      );
+    }
+
+    return /male|man|daniel|alex|david|mark|matthew|hans|paul|quinn/i.test(
+      name
+    );
   });
 
-  return preferredVoice || voices.find((voice) => hints.some((hint) => hint && voice.lang.toLowerCase().startsWith(hint))) || voices[0] || null;
+  return (
+    preferredVoice ||
+    voices.find((voice) =>
+      hints.some(
+        (hint) =>
+          hint &&
+          voice.lang
+            .toLowerCase()
+            .startsWith(hint)
+      )
+    ) ||
+    voices[0] ||
+    null
+  );
 }
 
 function makeUtterance() {
@@ -633,38 +800,71 @@ function makeUtterance() {
     speechSynthesis.cancel();
   }
 
-  const newUtterance = new SpeechSynthesisUtterance(currentStory);
-  newUtterance.lang = languageLocaleMap[currentLanguage] || 'en-US';
+  const newUtterance =
+    new SpeechSynthesisUtterance(currentStory);
+
+  newUtterance.lang =
+    languageLocaleMap[currentLanguage] || 'en-US';
+
   newUtterance.rate = voiceRate;
   newUtterance.volume = volume;
-  newUtterance.pitch = activeVoice === 'female' ? 1.15 : 0.85;
+  newUtterance.pitch =
+    activeVoice === 'female' ? 1.15 : 0.85;
 
-  const selectedVoice = getVoiceForLanguage(currentLanguage);
+  const selectedVoice =
+    getVoiceForLanguage(currentLanguage);
+
   if (selectedVoice) {
     newUtterance.voice = selectedVoice;
   }
 
   newUtterance.onboundary = (event) => {
-    if (utterance !== newUtterance || event.name !== 'word') return;
-    const spokenSoFar = currentStory.slice(0, event.charIndex);
-    const wordsSoFar = spokenSoFar.split(/\s+/).filter(Boolean).length;
+    if (
+      utterance !== newUtterance ||
+      event.name !== 'word'
+    ) {
+      return;
+    }
+
+    const spokenSoFar =
+      currentStory.slice(0, event.charIndex);
+
+    const wordsSoFar =
+      spokenSoFar
+        .split(/\s+/)
+        .filter(Boolean).length;
+
     currentWordIndex = wordsSoFar;
+
     highlightWord(currentWordIndex);
     updateProgressBar();
   };
 
   newUtterance.onend = () => {
-    if (utterance !== newUtterance) return;
+    if (utterance !== newUtterance) {
+      return;
+    }
+
     stopHighlightSync();
-    currentWordIndex = Math.max(1, currentStory.trim().split(/\s+/).length);
+
+    currentWordIndex = Math.max(
+      1,
+      currentStory.trim().split(/\s+/).length
+    );
+
     updateProgressBar();
+
     isPlaying = false;
     updatePlayState();
+
     showQuestionScreen();
   };
 
   newUtterance.onerror = () => {
-    if (utterance !== newUtterance) return;
+    if (utterance !== newUtterance) {
+      return;
+    }
+
     isPlaying = false;
     updatePlayState();
   };
@@ -674,11 +874,22 @@ function makeUtterance() {
 
 function highlightWord(index) {
   resetHighlights();
-  const safeIndex = Math.min(Math.max(0, index), spanElements.length - 1);
+
+  const safeIndex = Math.min(
+    Math.max(0, index),
+    spanElements.length - 1
+  );
+
   const span = spanElements[safeIndex];
+
   if (span) {
     span.classList.add('active');
-    span.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'smooth' });
+
+    span.scrollIntoView({
+      block: 'nearest',
+      inline: 'nearest',
+      behavior: 'smooth'
+    });
   }
 }
 
@@ -688,136 +899,195 @@ function playStory() {
     return;
   }
 
-  const words = currentStory.trim().split(/\s+/);
-  const totalWords = Math.max(1, words.length);
-
   if (speechSynthesis.paused) {
     speechSynthesis.resume();
+
     startHighlightSync();
+
     isPlaying = true;
     updatePlayState();
+
     return;
   }
 
-  if (speechSynthesis.speaking || speechSynthesis.pending) {
+  if (
+    speechSynthesis.speaking ||
+    speechSynthesis.pending
+  ) {
     return;
   }
 
-  if (currentWordIndex > 0 && currentWordIndex < totalWords) {
-    playFromWordIndex(currentWordIndex);
-    return;
-  }
-
-  currentWordIndex = 0;
-  resetHighlights();
-  makeUtterance();
-  speechSynthesis.speak(utterance);
-  startHighlightSync();
-  isPlaying = true;
-  updatePlayState();
-  updateProgressBar();
+  speakCurrentSlide();
 }
+
 function playFromWordIndex(startIndex) {
   if (!('speechSynthesis' in window)) {
     alert('Speech synthesis is not supported in this browser.');
     return;
   }
 
-  stopSpeech(); // Stop any current playback
+  stopSpeech();
 
-  // Get all words and calculate substring from clicked position
-  const words = currentStory.trim().split(/\s+/);
-  const startingWords = words.slice(startIndex);
-  const substoryFromClick = startingWords.join(' ');
+  const words =
+    currentStory.trim().split(/\s+/);
 
-  // Create utterance from the clicked position onwards
-  const newUtterance = new SpeechSynthesisUtterance(substoryFromClick);
-  newUtterance.lang = languageLocaleMap[currentLanguage] || 'en-US';
+  const startingWords =
+    words.slice(startIndex);
+
+  const substoryFromClick =
+    startingWords.join(' ');
+
+  const newUtterance =
+    new SpeechSynthesisUtterance(
+      substoryFromClick
+    );
+
+  newUtterance.lang =
+    languageLocaleMap[currentLanguage] || 'en-US';
+
   newUtterance.rate = voiceRate;
   newUtterance.volume = volume;
-  newUtterance.pitch = activeVoice === 'female' ? 1.15 : 0.85;
+  newUtterance.pitch =
+    activeVoice === 'female' ? 1.15 : 0.85;
 
-  const selectedVoice = getVoiceForLanguage(currentLanguage);
+  const selectedVoice =
+    getVoiceForLanguage(currentLanguage);
+
   if (selectedVoice) {
     newUtterance.voice = selectedVoice;
   }
 
-  let offsetWordIndex = startIndex; // Track offset from start
+  const offsetWordIndex = startIndex;
 
   newUtterance.onboundary = (event) => {
-    if (utterance !== newUtterance || event.name !== 'word') return;
+    if (
+      utterance !== newUtterance ||
+      event.name !== 'word'
+    ) {
+      return;
+    }
+
     try {
-      const spokenSoFar = substoryFromClick.slice(0, event.charIndex);
-      const wordsSoFar = spokenSoFar.split(/\s+/).filter(Boolean).length;
-      if (wordsSoFar > 0 && wordsSoFar <= spanElements.length) {
-        currentWordIndex = Math.max(0, offsetWordIndex + wordsSoFar - 1);
+      const spokenSoFar =
+        substoryFromClick.slice(
+          0,
+          event.charIndex
+        );
+
+      const wordsSoFar =
+        spokenSoFar
+          .split(/\s+/)
+          .filter(Boolean).length;
+
+      if (
+        wordsSoFar > 0 &&
+        wordsSoFar <= spanElements.length
+      ) {
+        currentWordIndex =
+          Math.max(
+            0,
+            offsetWordIndex +
+              wordsSoFar -
+              1
+          );
+
         highlightWord(currentWordIndex);
         updateProgressBar();
       }
-    } catch (e) {
-      console.error('Boundary event error:', e);
+    } catch (error) {
+      console.error(
+        'Boundary event error:',
+        error
+      );
     }
   };
 
   newUtterance.onend = () => {
-    if (utterance !== newUtterance) return;
+    if (utterance !== newUtterance) {
+      return;
+    }
+
     stopHighlightSync();
-    currentWordIndex = Math.max(1, currentStory.trim().split(/\s+/).length);
+
+    currentWordIndex = Math.max(
+      1,
+      currentStory.trim().split(/\s+/).length
+    );
+
     updateProgressBar();
+
     isPlaying = false;
     updatePlayState();
+
     showQuestionScreen();
   };
 
   newUtterance.onerror = () => {
-    if (utterance !== newUtterance) return;
+    if (utterance !== newUtterance) {
+      return;
+    }
+
     isPlaying = false;
     updatePlayState();
   };
 
   utterance = newUtterance;
+
   speechSynthesis.speak(utterance);
+
   startHighlightSync();
+
   isPlaying = true;
   updatePlayState();
   updateProgressBar();
 }
 
-function pauseStory() 
+function pauseStory() {
   if (!('speechSynthesis' in window)) {
     return;
   }
 
-  if (utterance && isPlaying) {
+  if (
+    speechSynthesis.speaking &&
+    !speechSynthesis.paused
+  ) {
     speechSynthesis.pause();
+
     stopHighlightSync();
+
     isPlaying = false;
     updatePlayState();
-
+  }
 }
-
 
 function setLanguage(languageCode) {
   currentLanguage = languageCode;
-  currentStory = storiesByLanguage[languageCode] || storiesByLanguage.en;
+
+  currentStory =
+    storiesByLanguage[languageCode] ||
+    storiesByLanguage.en;
+
   currentWordIndex = 0;
-  buildStoryText();
-  if (speechSynthesis.speaking || speechSynthesis.paused) {
+
+  if (
+    speechSynthesis.speaking ||
+    speechSynthesis.paused
+  ) {
     stopSpeech();
   }
+
+  buildStoryText();
 }
 
 function setSpeed(value) {
-  voiceRate = Number(value);
+  voiceRate = Number(value) || 1;
+
   updateProgressBar();
-  if (speechSynthesis.speaking || speechSynthesis.paused) {
-    stopSpeech();
-    speakCurrentSlide();
-  }
 }
 
 function updateVolume(value) {
   volume = Number(value) / 100;
+
   if (utterance) {
     utterance.volume = volume;
   }
@@ -831,100 +1101,260 @@ function toggleFullScreen() {
   }
 }
 
-startButton.addEventListener('click', () => {
-  showScreen('story');
+function wireUI() {
+  const prev = document.getElementById('prevSlide');
+  const next = document.getElementById('nextSlide');
+
+  if (prev) {
+    prev.addEventListener('click', prevSlide);
+  }
+
+  if (next) {
+    next.addEventListener('click', nextSlide);
+  }
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'ArrowRight') {
+      nextSlide();
+    }
+
+    if (event.key === 'ArrowLeft') {
+      prevSlide();
+    }
+  });
+}
+
+function populateVoices() {
+  if (!voiceSelect) {
+    return;
+  }
+
+  const voices = speechSynthesis.getVoices();
+
+  voiceSelect.innerHTML = '';
+
+  voices.forEach((voice) => {
+    const option =
+      document.createElement('option');
+
+    option.value = voice.name;
+
+    option.textContent =
+      `${voice.name} — ${voice.lang}`;
+
+    voiceSelect.appendChild(option);
+  });
+
+  if (!voiceSelect.value && voices[0]) {
+    voiceSelect.value = voices[0].name;
+  }
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  populateVoices();
+
+  speechSynthesis.onvoiceschanged =
+    populateVoices;
+
   buildSlides();
-  renderSlide();
-  // autoplay first slide
-  speakCurrentSlide();
+
+  wireUI();
+
+  updatePlayState();
 });
 
-backButton.addEventListener('click', () => {
-  stopSpeech();
-  showScreen('intro');
-});
+if (startButton) {
+  startButton.addEventListener('click', () => {
+    showScreen('story');
 
-questionBackButton.addEventListener('click', () => {
-  showScreen('story');
-});
+    buildSlides();
 
-doneButton.addEventListener('click', finishQuestions);
-
-fullscreenButton.addEventListener('click', toggleFullScreen);
-playButton.addEventListener('click', () => {
-  if (speechSynthesis.paused) {
-    speechSynthesis.resume();
-    startHighlightSync();
-    isPlaying = true;
-    updatePlayState();
-  } else {
-    speakCurrentSlide();
-  }
-});
-pauseButton.addEventListener('click', () => {
-  if (speechSynthesis.speaking) {
-    speechSynthesis.pause();
-    stopHighlightSync();
-    isPlaying = false;
-    updatePlayState();
-  }
-});
-voiceSelect.addEventListener('change', (event) => {
-  activeVoice = event.target.value;
-  if (speechSynthesis.speaking || speechSynthesis.paused) {
-    stopSpeech();
-    speakCurrentSlide();
-  }
-});
-languageSelect.addEventListener('change', (event) => {
-  setLanguage(event.target.value);
-  // rebuild slides and autoplay current slide if was playing
-  buildSlides();
-  renderSlide();
-  if (isPlaying) speakCurrentSlide();
-});
-speedSelect.addEventListener('change', (event) => {
-  setSpeed(event.target.value);
-  if (isPlaying) {
-    stopSpeech();
-    speakCurrentSlide();
-  }
-});
-volumeSlider.addEventListener('input', (event) => updateVolume(event.target.value));
-progressSlider.addEventListener('input', (event) => {
-  const words = currentStory.trim().split(/\s+/);
-  const totalWords = Math.max(1, words.length);
-  const clickedWordIndex = Math.round((Number(event.target.value) / 100) * totalWords);
-
-  // If already playing, play from clicked position
-  if (isPlaying) {
-    playFromWordIndex(clickedWordIndex);
-  } else {
-    // If not playing, just update visual position
-    currentWordIndex = clickedWordIndex;
-    highlightWord(currentWordIndex);
-    updateProgressBar();
-  }
-  const pct = Math.min(100, Math.max(0, Number(event.target.value)));
-  const slideIndex = Math.round((pct / 100) * Math.max(0, slides.length - 1));
-  if (isPlaying) {
-    currentSlide = slideIndex;
     renderSlide();
+
+    currentSlide = 0;
+
     speakCurrentSlide();
-  } else {
-    currentSlide = slideIndex;
-    renderSlide();
+  });
+}
+
+if (backButton) {
+  backButton.addEventListener('click', () => {
+    stopSpeech();
+
+    showScreen('intro');
+  });
+}
+
+if (questionBackButton) {
+  questionBackButton.addEventListener('click', () => {
+    showScreen('story');
+  });
+}
+
+if (doneButton) {
+  doneButton.addEventListener(
+    'click',
+    finishQuestions
+  );
+}
+
+if (fullscreenButton) {
+  fullscreenButton.addEventListener(
+    'click',
+    toggleFullScreen
+  );
+}
+
+/* PLAY BUTTON */
+
+if (playButton) {
+  playButton.addEventListener('click', () => {
+    if (speechSynthesis.paused) {
+      speechSynthesis.resume();
+
+      startHighlightSync();
+
+      isPlaying = true;
+
+      updatePlayState();
+    } else {
+      speakCurrentSlide();
+    }
+  });
+}
+
+/* PAUSE BUTTON */
+
+if (pauseButton) {
+  pauseButton.addEventListener('click', () => {
+    pauseStory();
+  });
+}
+
+/* VOICE */
+
+if (voiceSelect) {
+  voiceSelect.addEventListener(
+    'change',
+    (event) => {
+      activeVoice = event.target.value;
+
+      if (
+        speechSynthesis.speaking ||
+        speechSynthesis.paused
+      ) {
+        const wasPlaying = isPlaying;
+
+        stopSpeech();
+
+        if (wasPlaying) {
+          speakCurrentSlide();
+        }
+      }
+    }
+  );
+}
+
+/* LANGUAGE */
+
+if (languageSelect) {
+  languageSelect.addEventListener(
+    'change',
+    (event) => {
+      const wasPlaying = isPlaying;
+
+      setLanguage(event.target.value);
+
+      buildSlides();
+
+      renderSlide();
+
+      if (wasPlaying) {
+        speakCurrentSlide();
+      }
+    }
+  );
+}
+
+/* SPEED */
+
+if (speedSelect) {
+  speedSelect.addEventListener(
+    'change',
+    (event) => {
+      const wasPlaying = isPlaying;
+
+      setSpeed(event.target.value);
+
+      if (wasPlaying) {
+        stopSpeech();
+        speakCurrentSlide();
+      }
+    }
+  );
+}
+
+/* VOLUME */
+
+if (volumeSlider) {
+  volumeSlider.addEventListener(
+    'input',
+    (event) => {
+      updateVolume(event.target.value);
+    }
+  );
+}
+
+/* PROGRESS SLIDER */
+
+if (progressSlider) {
+  progressSlider.addEventListener(
+    'input',
+    (event) => {
+      const percentage =
+        Number(event.target.value);
+
+      const slideIndex = Math.round(
+        (percentage / 100) *
+          Math.max(0, slides.length - 1)
+      );
+
+      const wasPlaying = isPlaying;
+
+      stopSpeech();
+
+      currentSlide = Math.min(
+        slides.length - 1,
+        Math.max(0, slideIndex)
+      );
+
+      renderSlide();
+
+      if (wasPlaying) {
+        speakCurrentSlide();
+      }
+    }
+  );
+}
+
+window.addEventListener(
+  'beforeunload',
+  () => {
+    stopSpeech();
   }
-});
+);
 
-window.addEventListener('beforeunload', () => {
-  stopSpeech();
-});
-
-window.speechSynthesis?.addEventListener('voiceschanged', () => {
-  buildStoryText();
-});
+if ('speechSynthesis' in window) {
+  window.speechSynthesis.addEventListener(
+    'voiceschanged',
+    populateVoices
+  );
+}
 
 buildStoryText();
+
 setSpeed(1);
+
 updateVolume(100);
+
+updatePlayState();
