@@ -506,6 +506,24 @@ input[type="range"] {
 
 .story-card { position: relative; }
 
+.story-card-image {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  width: 84px;
+  height: 84px;
+  object-fit: contain;
+  opacity: 0.55;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.story-text,
+.nav-button {
+  position: relative;
+  z-index: 1;
+}
+
 .control-card {
   display: grid;
   gap: 8px;
